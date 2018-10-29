@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+	    <% include templates/head.ejs%>
+	</head>
+
+	<body>
+
+
+	<!-- Start Page Loading -->
+		 <div id="loader-wrapper">
+		      <div id="loader"></div>        
+		      <div class="loader-section section-left"></div>
+		      <div class="loader-section section-right"></div>
+		 </div>
+	<!-- End Page Loading -->
+	
+  	<!-- START HEADER -->
+		<% include templates/header.ejs%>
+  	<!-- END HEADER -->
+
+  	<!-- START MAIN -->
+  		<div id="main">
+    	<!-- START WRAPPER -->
+    		<div class="wrapper">
+
+      		<!-- START LEFT SIDEBAR NAV-->
+ 				<% include templates/left-sidebar-nav.ejs %>
+ 			<!-- END LEFT SIDEBAR NAV-->
+
+      		<!-- START CONTENT -->
+			    <section id="content">
+			        
+			        <% include templates/breadcrumbs.ejs %>
+			        
+			        <!--start container-->
+			        <div class="container">
+			          <div class="section" id="content-loaded">					
+							<%- body %>
+			          </div>
+			        
+			        <% include templates/floating-action-button.ejs %>
+			        </div>
+			        <!--end container-->
+
+			    </section>
+      		<!-- END CONTENT -->					
+
+      		<!-- START RIGHT SIDEBAR NAV-->
+				<% include templates/right-sidebar-nav.ejs %>
+      		<!-- LEFT RIGHT SIDEBAR NAV-->
+			</div>
+    	<!-- END WRAPPER -->
+    	</div>
+  	<!-- END MAIN -->
+
+
+	<!-- START FOOTER -->
+		<% include templates/footer.ejs%>
+	<!-- END FOOTER -->
+
+	<!-- ================================================
+    Scripts
+    ================================================ -->
+	    
+    <!-- jQuery Library -->
+    <script type="text/javascript" src="js/plugins/jquery-1.11.2.min.js"></script>    
+    <!--materialize js-->
+    <script type="text/javascript" src="js/materialize.js"></script>
+    <!--prism
+    <script type="text/javascript" src="js/prism/prism.js"></script>-->
+    <!--scrollbar-->
+    <script type="text/javascript" src="js/plugins/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+    <!-- chartist -->
+    <script type="text/javascript" src="js/plugins/chartist-js/chartist.min.js"></script>   
+    
+    <!--plugins.js - Some Specific JS codes for Plugin Settings-->
+    <script type="text/javascript" src="js/plugins.js"></script>
+    <!--custom-script.js - Add your own theme custom JS-->
+    <script type="text/javascript" src="js/custom-script.js"></script>
+    
+    <script>
+    
+    </script>
+
+	</body>
+</html>
