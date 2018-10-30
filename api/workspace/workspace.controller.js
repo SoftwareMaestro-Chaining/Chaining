@@ -1,6 +1,5 @@
-
-
 exports.index = (req, res) => {
+
     res.render('workspaces/index', {
         workspaces: [
             {
@@ -9,7 +8,8 @@ exports.index = (req, res) => {
             description : 'testWorkspaceName01 is the best workspace ever! \n Because testWorkspace is in the best blockchain network which is provided by Chaining.',
             scope: 'public',
             type: 'Ethereum',
-            createdAt: new Date().toDateString()
+            createdAt: new Date().toDateString(),
+            userName: 'testUserName01'
             },
             {
             id: 'testWorkspaceId02',
@@ -17,7 +17,8 @@ exports.index = (req, res) => {
             description : 'testWorkspaceName02 is the best workspace ever! \n Because testWorkspace is in the best blockchain network which is provided by Chaining.',
             scope: 'public',
             type: 'Hyperledger',
-            createdAt: new Date().toDateString()
+            createdAt: new Date().toDateString(),
+            userName: 'testUserName01'
             },
             {
             id: 'testWorkspaceId03',
@@ -25,15 +26,15 @@ exports.index = (req, res) => {
             description : 'testWorkspaceName01 is the best workspace ever! \n Because testWorkspace is in the best blockchain network which is provided by Chaining.',
             scope: 'private',
             type: 'Ethereum',
-            createdAt: new Date().toDateString()
-            },
-        ],
+            createdAt: new Date().toDateString(),
+            userName: 'testUserName01'
+            }
+        ]
     });
 }
 
 exports.show = (req, res) => {
-    res.render('show', {
-        pageUrl: req.url,
+    res.render('workspaces/show', {
         workspace: {
             id: 'testWorkspaceId01',
             name: 'testWorkspaceName01',
@@ -42,7 +43,6 @@ exports.show = (req, res) => {
             createdAt: new Date().toDateString()
         }
     });
-    console.log("######"+req.url);
 }
 
 exports.new = (req, res) => {

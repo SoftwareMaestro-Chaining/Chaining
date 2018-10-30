@@ -10,13 +10,30 @@ NOTE:
 PLACE HERE YOUR OWN CSS CODES AND IF NEEDED, OVERRIDE THE STYLES FROM THE OTHER STYLESHEETS.
 WE WILL RELEASE FUTURE UPDATES SO IN ORDER TO NOT OVERWRITE YOUR STYLES IT'S BETTER LIKE THIS.  */
 
+/*layout.ejs=========================================================================start*/
 
+#content {
+  min-height: 85vh;
+}
+
+/*layout.ejs=========================================================================end*/
+
+
+/*workspaces/index.ejs=========================================================================start*/
+
+
+
+/*workspaces/index.ejs=========================================================================end*/
+
+
+/*workspaces/new.ejs=========================================================================start*/
 .radio-img-selector input{
     margin:0;padding:0;
     -webkit-appearance:none;
        -moz-appearance:none;
             appearance:none;
     display: none;
+
 
 }
 .ethereum-logo{background-image: url("/images/ethereum-logo.png");}
@@ -53,3 +70,5 @@ WE WILL RELEASE FUTURE UPDATES SO IN ORDER TO NOT OVERWRITE YOUR STYLES IT'S BET
 a:visited{color:#888}
 a{color:#444;text-decoration:none;}
 p{margin-bottom:.3em;}
+
+/*workspaces/new.ejs=========================================================================end*/

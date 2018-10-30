@@ -1,29 +1,33 @@
-<!--breadcrumbs start-->
+<!-- breadcrumbs start-->
 
+<% requestObject = typeof requestObject !== 'object' ? {} : requestObject %>
+<% apiUrl = requestObject.url.split('/') %>
+<% apiObjs = apiUrl[1] %>
+<% apiObj = apiObjs.substring(0, apiObjs.length - 1)%>
 
-    <div id="breadcrumbs-wrapper">
-        <!-- Search for small screen -->
-        <div class="header-search-wrapper grey hide-on-large-only">
-            <i class="mdi-action-search active"></i>
-            <input type="text" name="Search" class="header-search-input z-depth-2" placeholder="">
-        </div>
-
-<% if (typeof pageUrl != 'undefined') { apiUrl = pageUrl.split('/'); } %>
-
-<% if (typeof apiUrl != 'undefined' && apiUrl[2] == 'workspaces') {%>
-      <div class="container">
-        <div class="row">
-          <div class="col s12 m12 l12">
-            <h5 class="breadcrumbs-title"><%= workspace.name %></h5>
-            <ol class="breadcrumbs">
-                <li><a href="/workspaces">Workspaces</a></li>
-                <li><a href="/workspaces/#{workspace.id}"><%= workspace.name %></a></li>
-                <!-- <li class="active">workspace.asset</li> -->
-            </ol>
+<% if (apiUrl[2]) { %>
+  <% workspace = typeof workspace !== 'object' ? {} : workspace %>
+      <div id="breadcrumbs-wrapper">
+          <!-- Search for small screen -->
+          <div class="header-search-wrapper grey hide-on-large-only">
+              <i class="mdi-action-search active"></i>
+              <input type="text" name="Search" class="header-search-input z-depth-2" placeholder="">
           </div>
-        </div>
+
+          <div class="container">
+            <div class="row">
+              <div class="col s12 m12 l12">
+                <h5 class="breadcrumbs-title"><%= workspace=='undefined'? workspace.name : apiUrl[2].toUpperCase() %></h5>
+                <ol class="breadcrumbs">
+                    <li><a href="/<%=apiObjs%>"><%=apiObjs.toUpperCase()%></a></li>
+                    <li><a href="#"><%= workspace=='undefined'? workspace.name : apiUrl[2].toUpperCase() %></a></li>
+                    <!-- <li class="active">workspace.asset</li> -->
+                </ol>
+              </div>
+            </div>
+          </div>
       </div>
 <% } %>
-    </div>
+
 
 <!--breadcrumbs end
