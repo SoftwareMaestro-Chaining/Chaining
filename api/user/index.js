@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-const controller = require('../controller/user.controller');
+const controller = require('./user.controller');
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
@@ -19,6 +19,8 @@ router.get('/', function(req, res, next) {
   res.render('users/sign_in', {title : 'Chaining'})
 
 });
+
+
 
 /* GET users listing. */
 

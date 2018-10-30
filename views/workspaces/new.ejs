@@ -1,81 +1,79 @@
 <% layout('../layout') -%>
 
+
+
 <div class="row">
-            <div class="col s12 m12 l12">
-              <div class="card-panel">
-                <h4 class="header2">Form Advance</h4>
+  <div class="col s12 m12 l12">
+    <div class="card-panel">
+      <h4 class="header2">Create a new workspace</h4>
+        <div class="row">
+          <form class="col s12">
+            <div class="row">
+              <div class="input-field col s6">
+                <input id="workspace_name" type="text">
+                <label for="workspace_name">Workspace Name</label>
+              </div>
+              <div class="input-field col s6">
+                <input id="description" type="text">
+                <label for="description">Description</label>
+              </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <div  class="section">
+              <div class="col s12 m12 l12">
+                <h4 class="header2">Hosted Workspace</h4>  
+              </div>
+              <div class="row">
+                  <form action="#">
+                    <div class="col s12 m6 l6">
+                      <p>
+                        <input name="group1" type="radio" id="test1">
+                        <label for="test1">Public</label><br>
+                        <label>This is a workspace for your eyes only</label>
+                      </p>
+                    </div>
+                    <div class="col s12 m6 l6">
+                      <p>
+                        <input name="group1" type="radio" id="test2">
+                        <label for="test2">Private</label><br>
+                        <label>This will create a workspace for everybody to see</label>
+                      </p>
+                    </div>
+                  </form>
+              </div>
+            </div>
+
+            <div class="divider"></div>
+              <div class="section">
+                <div class="col s12 m12 l12">
+                    <h4 class="header2">Choose a Template</h4>  
+                </div>
                 <div class="row">
-                  <form class="col s12">
-                    <div class="row">
-                      <div class="input-field col s6">
-                        <input id="first_name" type="text">
-                        <label for="first_name">First Name</label>
+                  <form action="#">
+                    <div class="radio-img-selector">
+                      <div class="col s12 m2 l2">
+                        <input id="ethereum-logo" type="radio" name="template-lang" value="ethereum-logo" />
+                        <label class="radio-img-btn ethereum-logo" for="ethereum-logo"></label>
                       </div>
-                    
-                      <div class="input-field col s6">
-                        <input id="last_name" type="text">
-                        <label for="last_name">Last Name</label>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="input-field col s12">
-                        <input id="email5" type="email">
-                        <label for="email">Email</label>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="input-field col s12">
-                        <input id="password6" type="password">
-                        <label for="password">Password</label>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="input-field col s6">
-                        <div class="select-wrapper initialized"><span class="caret">▼</span><input type="text" class="select-dropdown" readonly="true" data-activates="select-options-0b73193f-cfd4-b79e-5102-c7963e3dc9e7" value="Choose your profile"><ul id="select-options-0b73193f-cfd4-b79e-5102-c7963e3dc9e7" class="dropdown-content select-dropdown "><li class="disabled"><span>Choose your profile</span></li><li class=""><span>Manager</span></li><li class=""><span>Developer</span></li><li class=""><span>Business</span></li></ul><select class="initialized">
-                          <option value="" disabled="" selected="">Choose your profile</option>
-                          <option value="1">Manager</option>
-                          <option value="2">Developer</option>
-                          <option value="3">Business</option>
-                        </select></div>
-                        <label>Select Profile</label>
-                      </div>                        
-                      <div class="input-field col s6">
-                        <input type="text" class="datepicker picker__input" readonly="" id="P1569012373" tabindex="-1" aria-haspopup="true" aria-expanded="false" aria-readonly="false" aria-owns="P1569012373_root"><div class="picker" id="P1569012373_root" tabindex="0" aria-hidden="true"><div class="picker__holder"><div class="picker__frame"><div class="picker__wrap"><div class="picker__box"><div class="picker__date-display"><div class="picker__weekday-display">Monday</div><div class="picker__month-display"><div>Oct</div></div><div class="picker__day-display"><div>29</div></div><div class="picker__year-display"><div>2018</div></div></div><div class="picker__calendar-container"><div class="picker__header"><select class="picker__select--month browser-default" disabled="" aria-controls="P1569012373_table" title="Select a month"><option value="0">January</option><option value="1">February</option><option value="2">March</option><option value="3">April</option><option value="4">May</option><option value="5">June</option><option value="6">July</option><option value="7">August</option><option value="8">September</option><option value="9" selected="">October</option><option value="10">November</option><option value="11">December</option></select><select class="picker__select--year browser-default" disabled="" aria-controls="P1569012373_table" title="Select a year"><option value="2011">2011</option><option value="2012">2012</option><option value="2013">2013</option><option value="2014">2014</option><option value="2015">2015</option><option value="2016">2016</option><option value="2017">2017</option><option value="2018" selected="">2018</option><option value="2019">2019</option><option value="2020">2020</option><option value="2021">2021</option><option value="2022">2022</option><option value="2023">2023</option><option value="2024">2024</option><option value="2025">2025</option></select><div class="picker__nav--prev" data-nav="-1" role="button" aria-controls="P1569012373_table" title="Previous month"> </div><div class="picker__nav--next" data-nav="1" role="button" aria-controls="P1569012373_table" title="Next month"> </div></div><table class="picker__table" id="P1569012373_table" role="grid" aria-controls="P1569012373" aria-readonly="true"><thead><tr><th class="picker__weekday" scope="col" title="Sunday">S</th><th class="picker__weekday" scope="col" title="Monday">M</th><th class="picker__weekday" scope="col" title="Tuesday">T</th><th class="picker__weekday" scope="col" title="Wednesday">W</th><th class="picker__weekday" scope="col" title="Thursday">T</th><th class="picker__weekday" scope="col" title="Friday">F</th><th class="picker__weekday" scope="col" title="Saturday">S</th></tr></thead><tbody><tr><td role="presentation"><div class="picker__day picker__day--outfocus" data-pick="1538233200000" role="gridcell" aria-label="30 September, 2018">30</div></td><td role="presentation"><div class="picker__day picker__day--infocus" data-pick="1538319600000" role="gridcell" aria-label="1 October, 2018">1</div></td><td role="presentation"><div class="picker__day picker__day--infocus" data-pick="1538406000000" role="gridcell" aria-label="2 October, 2018">2</div></td><td role="presentation"><div class="picker__day picker__day--infocus" data-pick="1538492400000" role="gridcell" aria-label="3 October, 2018">3</div></td><td role="presentation"><div class="picker__day picker__day--infocus" data-pick="1538578800000" role="gridcell" aria-label="4 October, 2018">4</div></td><td role="presentation"><div class="picker__day picker__day--infocus" data-pick="1538665200000" role="gridcell" aria-label="5 October, 2018">5</div></td><td role="presentation"><div class="picker__day picker__day--infocus" data-pick="1538751600000" role="gridcell" aria-label="6 October, 2018">6</div></td></tr><tr><td role="presentation"><div class="picker__day picker__day--infocus" data-pick="1538838000000" role="gridcell" aria-label="7 October, 2018">7</div></td><td role="presentation"><div class="picker__day picker__day--infocus" data-pick="1538924400000" role="gridcell" aria-label="8 October, 2018">8</div></td><td role="presentation"><div class="picker__day picker__day--infocus" data-pick="1539010800000" role="gridcell" aria-label="9 October, 2018">9</div></td><td role="presentation"><div class="picker__day picker__day--infocus" data-pick="1539097200000" role="gridcell" aria-label="10 October, 2018">10</div></td><td role="presentation"><div class="picker__day picker__day--infocus" data-pick="1539183600000" role="gridcell" aria-label="11 October, 2018">11</div></td><td role="presentation"><div class="picker__day picker__day--infocus" data-pick="1539270000000" role="gridcell" aria-label="12 October, 2018">12</div></td><td role="presentation"><div class="picker__day picker__day--infocus" data-pick="1539356400000" role="gridcell" aria-label="13 October, 2018">13</div></td></tr><tr><td role="presentation"><div class="picker__day picker__day--infocus" data-pick="1539442800000" role="gridcell" aria-label="14 October, 2018">14</div></td><td role="presentation"><div class="picker__day picker__day--infocus" data-pick="1539529200000" role="gridcell" aria-label="15 October, 2018">15</div></td><td role="presentation"><div class="picker__day picker__day--infocus" data-pick="1539615600000" role="gridcell" aria-label="16 October, 2018">16</div></td><td role="presentation"><div class="picker__day picker__day--infocus" data-pick="1539702000000" role="gridcell" aria-label="17 October, 2018">17</div></td><td role="presentation"><div class="picker__day picker__day--infocus" data-pick="1539788400000" role="gridcell" aria-label="18 October, 2018">18</div></td><td role="presentation"><div class="picker__day picker__day--infocus" data-pick="1539874800000" role="gridcell" aria-label="19 October, 2018">19</div></td><td role="presentation"><div class="picker__day picker__day--infocus" data-pick="1539961200000" role="gridcell" aria-label="20 October, 2018">20</div></td></tr><tr><td role="presentation"><div class="picker__day picker__day--infocus" data-pick="1540047600000" role="gridcell" aria-label="21 October, 2018">21</div></td><td role="presentation"><div class="picker__day picker__day--infocus" data-pick="1540134000000" role="gridcell" aria-label="22 October, 2018">22</div></td><td role="presentation"><div class="picker__day picker__day--infocus" data-pick="1540220400000" role="gridcell" aria-label="23 October, 2018">23</div></td><td role="presentation"><div class="picker__day picker__day--infocus" data-pick="1540306800000" role="gridcell" aria-label="24 October, 2018">24</div></td><td role="presentation"><div class="picker__day picker__day--infocus" data-pick="1540393200000" role="gridcell" aria-label="25 October, 2018">25</div></td><td role="presentation"><div class="picker__day picker__day--infocus" data-pick="1540479600000" role="gridcell" aria-label="26 October, 2018">26</div></td><td role="presentation"><div class="picker__day picker__day--infocus" data-pick="1540566000000" role="gridcell" aria-label="27 October, 2018">27</div></td></tr><tr><td role="presentation"><div class="picker__day picker__day--infocus" data-pick="1540652400000" role="gridcell" aria-label="28 October, 2018">28</div></td><td role="presentation"><div class="picker__day picker__day--infocus picker__day--today picker__day--highlighted" data-pick="1540738800000" role="gridcell" aria-label="29 October, 2018" aria-activedescendant="true">29</div></td><td role="presentation"><div class="picker__day picker__day--infocus" data-pick="1540825200000" role="gridcell" aria-label="30 October, 2018">30</div></td><td role="presentation"><div class="picker__day picker__day--infocus" data-pick="1540911600000" role="gridcell" aria-label="31 October, 2018">31</div></td><td role="presentation"><div class="picker__day picker__day--outfocus" data-pick="1540998000000" role="gridcell" aria-label="1 November, 2018">1</div></td><td role="presentation"><div class="picker__day picker__day--outfocus" data-pick="1541084400000" role="gridcell" aria-label="2 November, 2018">2</div></td><td role="presentation"><div class="picker__day picker__day--outfocus" data-pick="1541170800000" role="gridcell" aria-label="3 November, 2018">3</div></td></tr><tr><td role="presentation"><div class="picker__day picker__day--outfocus" data-pick="1541257200000" role="gridcell" aria-label="4 November, 2018">4</div></td><td role="presentation"><div class="picker__day picker__day--outfocus" data-pick="1541343600000" role="gridcell" aria-label="5 November, 2018">5</div></td><td role="presentation"><div class="picker__day picker__day--outfocus" data-pick="1541430000000" role="gridcell" aria-label="6 November, 2018">6</div></td><td role="presentation"><div class="picker__day picker__day--outfocus" data-pick="1541516400000" role="gridcell" aria-label="7 November, 2018">7</div></td><td role="presentation"><div class="picker__day picker__day--outfocus" data-pick="1541602800000" role="gridcell" aria-label="8 November, 2018">8</div></td><td role="presentation"><div class="picker__day picker__day--outfocus" data-pick="1541689200000" role="gridcell" aria-label="9 November, 2018">9</div></td><td role="presentation"><div class="picker__day picker__day--outfocus" data-pick="1541775600000" role="gridcell" aria-label="10 November, 2018">10</div></td></tr></tbody></table></div><div class="picker__footer"><button class="btn-flat picker__today" type="button" data-pick="1540738800000" disabled="" aria-controls="P1569012373">Today</button><button class="btn-flat picker__clear" type="button" data-clear="1" disabled="" aria-controls="P1569012373">Clear</button><button class="btn-flat picker__close" type="button" data-close="true" disabled="" aria-controls="P1569012373">Close</button></div></div></div></div></div></div>
-                        <label for="dob">DOB</label>
-                      </div>
-                      
-                    </div>
-                    
-                    <div class="row">
-                      <div class="file-field input-field col s6">
-                        <input class="file-path validate" type="text">
-                        <div class="btn">
-                          <span>Age</span>
-                          <input type="file">
-                        </div>
-                      </div>
-                      <div class="input-field col s6">                          
-                         <span>Image</span>
-                         <p class="range-field">
-                          <input type="range" id="test5" min="0" max="100"><span class="thumb"><span class="value"></span></span>
-                        </p>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="input-field col s12">
-                        <textarea id="message5" class="materialize-textarea" length="120"></textarea>
-                        <label for="message">Message</label>
-                      <span class="character-counter" style="float: right; font-size: 12px; height: 1px;"></span></div>
-                      <div class="row">
-                        <div class="input-field col s12">
-                          <button class="btn cyan waves-effect waves-light right" type="submit" name="action">Submit
-                            <i class="mdi-content-send right"></i>
-                          </button>
-                        </div>
+                      <div class="col s12 m2 l2">
+                        <input id="hyperledger-logo" type="radio" name="template-lang" value="hyperledger-logo" />
+                        <label class="radio-img-btn hyperledger-logo" for="hyperledger-logo"></label>
                       </div>
                     </div>
                   </form>
                 </div>
               </div>
-            </div>
-          </div>
+              <div class="row">
+                <div class="input-field col s12">
+                  <button class="btn cyan waves-effect waves-light right" type="submit" name="action">Submit
+                    <i class="mdi-content-send right"></i>
+                  </button>
+                </div>
+              </div>
+            </form>
+         </div>
+      </div>
+   </div>
+</div>

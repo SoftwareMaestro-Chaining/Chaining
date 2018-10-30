@@ -9,3 +9,47 @@ NOTE:
 ------
 PLACE HERE YOUR OWN CSS CODES AND IF NEEDED, OVERRIDE THE STYLES FROM THE OTHER STYLESHEETS.
 WE WILL RELEASE FUTURE UPDATES SO IN ORDER TO NOT OVERWRITE YOUR STYLES IT'S BETTER LIKE THIS.  */
+
+
+.radio-img-selector input{
+    margin:0;padding:0;
+    -webkit-appearance:none;
+       -moz-appearance:none;
+            appearance:none;
+    display: none;
+
+}
+.ethereum-logo{background-image: url("/images/ethereum-logo.png");}
+.hyperledger-logo{background-image: url("/images/hyperledger-logo.png");}
+
+.radio-img-selector input:active +.radio-img-btn{opacity: .9;}
+.radio-img-selector input:checked +.radio-img-btn{
+    -webkit-filter: none;
+       -moz-filter: none;
+            filter: none;
+}
+.radio-img-btn{
+    cursor:pointer;
+    background-size:contain;
+    background-repeat:no-repeat;
+    display:inline-block;
+    width:100px;
+    height:100px !important;
+
+    -webkit-transition: all 100ms ease-in;
+       -moz-transition: all 100ms ease-in;
+            transition: all 100ms ease-in;
+    -webkit-filter: brightness(1.8) grayscale(1) opacity(.7);
+       -moz-filter: brightness(1.8) grayscale(1) opacity(.7);
+            filter: brightness(1.8) grayscale(1) opacity(.7);
+}
+.radio-img-btn:hover{
+    -webkit-filter: brightness(1.2) grayscale(.5) opacity(.9);
+       -moz-filter: brightness(1.2) grayscale(.5) opacity(.9);
+            filter: brightness(1.2) grayscale(.5) opacity(.9);
+}
+
+/* Extras */
+a:visited{color:#888}
+a{color:#444;text-decoration:none;}
+p{margin-bottom:.3em;}
