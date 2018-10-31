@@ -4,6 +4,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var engine = require('ejs-locals');
+var bodyParser = require('body-parser'); 
 
 var homeRouter = require('./api/home/index');
 var workspaceRouter = require('./api/workspace/index');
@@ -30,15 +31,27 @@ app.use(function(req, res, next) {
    next();
 });
 
+
+
+ // to support JSON bodies
+ // to support URL-encoded bodies
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true })); 
+
+
+
+app.use('/', homeRouter);
+app.use('/users', userRouter);
+app.use('/workspaces', workspaceRouter);
+
+
+
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', homeRouter);
-app.use('/users', userRouter);
-app.use('/workspaces', workspaceRouter);
 
 
 // catch 404 and forward to error handler
@@ -56,6 +69,7 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
 
 
 

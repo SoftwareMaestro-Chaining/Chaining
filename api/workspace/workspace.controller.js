@@ -51,6 +51,7 @@ exports.new = (req, res) => {
 
 exports.create = (req, res) => {
     // res.render('create', {title : 'Chaining'});
+    console.log(req.body.workspace_name);
     res.redirect('/workspaces');
 }
 

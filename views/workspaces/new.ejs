@@ -6,14 +6,14 @@
     <div class="card-panel">
       <h4 class="header2">Create a new workspace</h4>
         <div class="row">
-          <form class="col s12">
+          <form class="col s12" action="/workspaces" method="post">
             <div class="row">
               <div class="input-field col s6">
-                <input id="workspace_name" type="text">
+                <input id="workspace_name" type="text" name="workspace_name">
                 <label for="workspace_name">Workspace Name</label>
               </div>
               <div class="input-field col s6">
-                <input id="description" type="text">
+                <input id="description" type="text" name="workspace_description">
                 <label for="description">Description</label>
               </div>
             </div>
@@ -25,43 +25,43 @@
                 <h4 class="header2">Hosted Workspace</h4>  
               </div>
               <div class="row">
-                  <form action="#">
+                  <!-- <form action="#"> -->
                     <div class="col s12 m6 l6">
                       <p>
-                        <input name="group1" type="radio" id="test1">
+                        <input name="workspace_scope" type="radio" id="test1" value="public">
                         <label for="test1">Public</label><br>
                         <label>This is a workspace for your eyes only</label>
                       </p>
                     </div>
                     <div class="col s12 m6 l6">
                       <p>
-                        <input name="group1" type="radio" id="test2">
+                        <input name="workspace_scope" type="radio" id="test2" value="private">
                         <label for="test2">Private</label><br>
                         <label>This will create a workspace for everybody to see</label>
                       </p>
                     </div>
-                  </form>
+                  <!-- </form> -->
               </div>
             </div>
 
             <div class="divider"></div>
               <div class="section">
                 <div class="col s12 m12 l12">
-                    <h4 class="header2">Choose a Template</h4>  
+                    <h4 class="header2">Choose a Template Type</h4>  
                 </div>
                 <div class="row center-align">
                   <form action="#">
                     <div class="radio-img-selector">
                       <div class="col s12 m6 l2">
-                        <input id="ethereum-logo" type="radio" name="template-lang" value="ethereum-logo" />
+                        <input id="ethereum-logo" type="radio" name="workspace_type" value="ethereum" />
                         <label class="radio-img-btn ethereum-logo" for="ethereum-logo"></label>
                       </div>
                       <div class="col s12 m6 l2">
-                        <input id="hyperledger-logo" type="radio" name="template-lang" value="hyperledger-logo" />
+                        <input id="hyperledger-logo" type="radio" name="workspace_type" value="hyperledger" />
                         <label class="radio-img-btn hyperledger-logo" for="hyperledger-logo"></label>
                       </div>
                     </div>
-                  </form>
+                  <!-- </form> -->
                 </div>
               </div>
               <div class="row">
@@ -69,9 +69,10 @@
                   <button class="btn cyan waves-effect waves-light right" type="submit" name="action">Submit
                     <i class="mdi-content-send right"></i>
                   </button>
+                </input>
                 </div>
               </div>
-            </form>
+          </form>
          </div>
       </div>
    </div>
