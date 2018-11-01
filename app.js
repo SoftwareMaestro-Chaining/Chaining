@@ -35,8 +35,8 @@ app.use(function(req, res, next) {
 
  // to support JSON bodies
  // to support URL-encoded bodies
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true })); 
+// app.use(bodyParser.json());
+// app.use(bodyParser.urlencoded({ extended: true })); 
 
 
 
