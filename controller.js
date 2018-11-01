@@ -97,7 +97,7 @@ var promises = [p(node), p(main)]
 		'items' : items,
 		'relations' : relations
 	    }
-
+        
 	    return result 
     })	.then(callback)
 	/*

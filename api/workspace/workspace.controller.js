@@ -34,6 +34,7 @@ exports.index = (req, res) => {
 }
 
 exports.show = (req, res) => {
+
     res.render('workspaces/show', {
         workspace: {
             id: 'testWorkspaceId01',

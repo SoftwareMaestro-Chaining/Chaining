@@ -10,23 +10,54 @@ NOTE:
 PLACE HERE YOUR OWN CSS CODES AND IF NEEDED, OVERRIDE THE STYLES FROM THE OTHER STYLESHEETS.
 WE WILL RELEASE FUTURE UPDATES SO IN ORDER TO NOT OVERWRITE YOUR STYLES IT'S BETTER LIKE THIS.  */
 
-/*layout.ejs=========================================================================start*/
+/*start=========================================================================layout.ejs*/
 
 #content {
   min-height: 85vh;
 }
 
-/*layout.ejs=========================================================================end*/
+/*end===========================================================================layout.ejs*/
 
 
-/*workspaces/index.ejs=========================================================================start*/
+/*start=========================================================================workspaces/topology-graph.ejs*/
+
+.kube-topology {
+  /*background-color: white;*/
+  /*width: 100px;*/
+}
+
+kubernetes-topology-graph {
+  width: 600px;
+  height: 400px;
+  border: 30px solid lightgray;
+  border-radius: 15px;
+  bottom: 40px;
+  right: 0;
+  z-index: 100;
+}
+
+kubernetes-topology-graph > svg {
+  background-color: rgba(1, 1, 1, 0.1);
 
 
+}
 
-/*workspaces/index.ejs=========================================================================end*/
+.controls {
+  position: fixed;
+  width: 600px;
+  right: 0;
+  bottom: 0px;
+  left: auto;
+  z-index: 100;
+}
+
+.controls > label {
+  color: dimgray;
+}
+/*end===========================================================================workspaces/topology-graph.ejs*/
 
 
-/*workspaces/new.ejs=========================================================================start*/
+/*start=========================================================================workspaces/new.ejs*/
 .radio-img-selector input{
     margin:0;padding:0;
     -webkit-appearance:none;
@@ -71,4 +102,4 @@ a:visited{color:#888}
 a{color:#444;text-decoration:none;}
 p{margin-bottom:.3em;}
 
-/*workspaces/new.ejs=========================================================================end*/
+/*end=========================================================================workspaces/new.ejs*/
