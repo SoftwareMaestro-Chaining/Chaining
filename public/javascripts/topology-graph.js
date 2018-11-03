@@ -371,18 +371,17 @@
                                 text = kinds[d.item.kind];
 
                                 if(d.item.kind == "Pod" && d.item.metadata.labels && d.item.metadata.labels.hasOwnProperty('name')){
-                                    switch(d.item.metadata.labels.hasOwnProperty('name')){
-                                        case 'Eth':
+                                    switch(d.item.metadata.labels.name){
+                                        case 'eth':
                                              text = kinds["Eth"];
                                              break;
-                                         case 'Remix':
+                                         case 'remix':
                                              text = kinds["Remix"];
                                              break;
-                                        case 'Jupyter':
+                                        case 'jupyter':
                                              text = kinds["Jupyter"];
                                              break;     
                                     }
-                                     text = kinds["Jupyter"];
                                  }
                             }
                             // console.log($scope);
