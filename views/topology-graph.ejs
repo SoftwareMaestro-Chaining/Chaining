@@ -65,6 +65,7 @@
        <kubernetes-topology-icon kind="Pod">
          <svg class="kube-topology">
            <use xlink:href="#vertex-Pod" x="15" y="15"></use>
+           <use xlink:href="images/remix.png" x="15" y="15"></use>
          </svg>
        </kubernetes-topology-icon>
        <label>Pods</label>
@@ -101,6 +102,24 @@
           <circle r="15" fill="#fff" stroke="#aaa"></circle>
           <text y="5" x="0.5" fill="#1186C1" font-family="FontAwesome" font-size="16px" text-anchor="middle">&#xf1b3;</text>
         </g>
+        <g class="Pod" id="remix-Pod">
+          <circle r="15" fill="#fff" stroke="#aaa"></circle>
+          <image xlink:href="images/remix.png" x="-15" y="-10" height="30px" width="30px"/>
+          <!-- <image xlink:href="https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Tux.svg/560px-Tux.svg.png" x="0" y="0" height="50px" width="50px"/> -->
+        </g>
+
+        <g class="Pod" id="eth-Pod">
+          <circle r="15" fill="#fff" stroke="#aaa"></circle>
+          <image xlink:href="images/eth.png" x="-15" y="-10" height="30px" width="30px"/>
+          <!-- <image xlink:href="https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Tux.svg/560px-Tux.svg.png" x="0" y="0" height="50px" width="50px"/> -->
+        </g>
+
+        <g class="Pod" id="jupyter-Pod">
+          <circle r="15" fill="#fff" stroke="#aaa"></circle>
+          <image xlink:href="images/jupyter.png" x="-12" y="-15" height="30px" width="25px"/>
+          <!-- <image xlink:href="https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Tux.svg/560px-Tux.svg.png" x="0" y="0" height="50px" width="50px"/> -->
+        </g>
+
         <g class="Service" id="vertex-Service">
           <circle r="15" fill="#fff" stroke="#aaa"></circle>
           <text y="8" x="-2" fill="#ff7f0e" font-family="PatternFlyIcons-webfont" font-size="18px" text-anchor="middle">&#xe61e;</text>
@@ -124,6 +143,9 @@
                   ReplicationController: '#vertex-ReplicationController',
                   Node: '#vertex-Node',
                   Service: '#vertex-Service',
+                  Remix: '#remix-Pod',
+                  Eth: '#eth-Pod',
+                  Jupyter: '#jupyter-Pod',
                 };
 
                 $rootScope.poke = function() {
@@ -142,8 +164,8 @@
 
     <!-- <script src="/scratch/test.jsonp"></script> -->
     <!-- JSONP data sets to load -->
-    <!-- <script src="/all.jsonp"></script> -->
-    <script src="scratch/data-set-1.jsonp"></script>
+    <script src="/all.jsonp"></script>
+    <!-- <script src="scratch/data-set-1.jsonp"></script> -->
     <!-- <script src="scratch/data-set-2.jsonp"></script> -->
 </body>
 </html>

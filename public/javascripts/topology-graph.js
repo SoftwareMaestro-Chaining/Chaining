@@ -367,8 +367,25 @@
                         function icon(d) {
                             var text;
                             var kinds = $scope.kinds;
-                            if (kinds)
+                            if (kinds){
                                 text = kinds[d.item.kind];
+
+                                if(d.item.kind == "Pod" && d.item.metadata.labels && d.item.metadata.labels.hasOwnProperty('name')){
+                                    switch(d.item.metadata.labels.hasOwnProperty('name')){
+                                        case 'Eth':
+                                             text = kinds["Eth"];
+                                             break;
+                                         case 'Remix':
+                                             text = kinds["Remix"];
+                                             break;
+                                        case 'Jupyter':
+                                             text = kinds["Jupyter"];
+                                             break;     
+                                    }
+                                     text = kinds["Jupyter"];
+                                 }
+                            }
+                            // console.log($scope);
                             return text || "";
                         }
 
@@ -391,6 +408,8 @@
                                 added.attr("class", function(d) { return d.item.kind; });
                                 added.append("use").attr("xlink:href", icon);
                                 added.append("title");
+                                added.text(function(d){  if(d.item.kind == "Pod" && d.item.metadata.labels.name =='remix') return d.item.metadata.labels.name });
+                                
                                 vertices.selectAll("title")
                                      .text(function(d) { return d.item.metadata.name; });
                                 vertices.classed("weak", weak);
