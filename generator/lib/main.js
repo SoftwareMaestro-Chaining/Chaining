@@ -27,7 +27,10 @@ module.exports = function(option, callback){
 		'pod_name' : pod_name,
 		'password' : '1234',
 		'hostPort' : port,
-		'file' : id + '_template.yaml'
+		'file' : id + '_template.yaml',
+		'label' : {
+			'name' : option.app
+		}
 	}
 	env.ansible_sudo_pass = "1q2w3e!@#"
 	// console.log();
@@ -39,11 +42,11 @@ module.exports = function(option, callback){
 	var promise = command.exec();
 
 
-	var kong_config = {
-		url : 'http://192.168.99.20:8001'
-	}
+	// var kong_config = {
+	// 	url : 'http://192.168.99.20:8001'
+	// }
 
-	let kong = new Kong(kong_config);
+	// let kong = new Kong(kong_config);
 
 
 
@@ -67,17 +70,17 @@ module.exports = function(option, callback){
 			}
 		
 			//kong.addApi(api).then(data =>{
-			kong.updateOrCreateApi(api).then(data =>{
-				//console.log(data);
-				callback({'status' : 'success'});
-			}).catch(err =>{
-				console.log(err);
-				kong.updateApi(id, api).then(data=>{
-					callback({'status' : 'success'});
-				}).catch(err=>{
-					callback({'status' : 'error'});
-				});
-			});
+			// kong.updateOrCreateApi(api).then(data =>{
+			// 	//console.log(data);
+			// 	callback({'status' : 'success'});
+			// }).catch(err =>{
+			// 	console.log(err);
+			// 	kong.updateApi(id, api).then(data=>{
+			// 		callback({'status' : 'success'});
+			// 	}).catch(err=>{
+			// 		callback({'status' : 'error'});
+			// 	});
+			// });
 	}
 
 	var spawn = require('child-process-promise').spawn;

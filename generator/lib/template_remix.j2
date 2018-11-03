@@ -16,6 +16,7 @@ spec:
     metadata:
       labels:
        app: ide
+       name: "{{ label.name }}"
     spec:
         containers:
           - name: remix-ide
