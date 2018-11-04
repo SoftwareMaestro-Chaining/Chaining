@@ -1,6 +1,7 @@
 exports.index = (req, res) => {
 
     res.render('workspaces/index', {
+        //db.current_user.workspaces
         workspaces: [
             {
             id: 'testWorkspaceId01',
