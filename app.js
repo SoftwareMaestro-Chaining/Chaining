@@ -4,7 +4,10 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var engine = require('ejs-locals');
-var bodyParser = require('body-parser'); 
+var bodyParser = require('body-parser');
+var mongoose    = require('mongoose');
+
+var User = require('./api/user/user.model');
 
 var homeRouter = require('./api/home/index');
 var workspaceRouter = require('./api/workspace/index');
@@ -40,17 +43,18 @@ app.use(function(req, res, next) {
 
 
 
-app.use('/', homeRouter);
-app.use('/users', userRouter);
-app.use('/workspaces', workspaceRouter);
-
-
 
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+
+
+app.use('/', homeRouter);
+app.use('/users', userRouter);
+app.use('/workspaces', workspaceRouter);
 
 
 
@@ -69,6 +73,19 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+
+// CONNECT TO MONGODB SERVER
+var db = mongoose.connection;
+db.on('error', console.error);
+db.once('open', function(){
+    // CONNECTED TO MONGODB SERVER
+    console.log("Connected to mongod server");
+});
+
+mongoose.connect('mongodb://localhost/chainingdb')
+  .then(res => console.log("Connected to DB"))
+  .catch(err => console.log(err));
 
 
 
