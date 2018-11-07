@@ -21,7 +21,7 @@ exports.new = (req, res) => {
 }
 
 exports.create = (req, res) => {
-    var user = new User();
+
     var user = new User({username: req.body.username, email: req.body.email, password: req.body.password, createdAt: Date().toLocaleString()});
 
     user.save(function(err){

@@ -9,11 +9,11 @@
           <form class="col s12" action="/workspaces" method="post">
             <div class="row">
               <div class="input-field col s6">
-                <input id="workspace_name" type="text" name="workspace_name">
-                <label for="workspace_name">Workspace Name</label>
+                <input id="name" type="text" name="name">
+                <label for="name">Workspace Name</label>
               </div>
               <div class="input-field col s6">
-                <input id="description" type="text" name="workspace_description">
+                <input id="description" type="text" name="description">
                 <label for="description">Description</label>
               </div>
             </div>
@@ -28,14 +28,14 @@
                   <!-- <form action="#"> -->
                     <div class="col s12 m6 l6">
                       <p>
-                        <input name="workspace_scope" type="radio" id="test1" value="public">
+                        <input name="scope" type="radio" id="test1" value="public">
                         <label for="test1">Public</label><br>
                         <label>This is a workspace for your eyes only</label>
                       </p>
                     </div>
                     <div class="col s12 m6 l6">
                       <p>
-                        <input name="workspace_scope" type="radio" id="test2" value="private">
+                        <input name="scope" type="radio" id="test2" value="private">
                         <label for="test2">Private</label><br>
                         <label>This will create a workspace for everybody to see</label>
                       </p>
@@ -53,11 +53,11 @@
                   <form action="#">
                     <div class="radio-img-selector">
                       <div class="col s12 m6 l2">
-                        <input id="ethereum-logo" type="radio" name="workspace_type" value="ethereum" />
+                        <input id="ethereum-logo" type="radio" name="type" value="ethereum" />
                         <label class="radio-img-btn ethereum-logo" for="ethereum-logo"></label>
                       </div>
                       <div class="col s12 m6 l2">
-                        <input id="hyperledger-logo" type="radio" name="workspace_type" value="hyperledger" />
+                        <input id="hyperledger-logo" type="radio" name="type" value="hyperledger" />
                         <label class="radio-img-btn hyperledger-logo" for="hyperledger-logo"></label>
                       </div>
                     </div>

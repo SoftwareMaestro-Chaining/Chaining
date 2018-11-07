@@ -1,37 +1,55 @@
-exports.index = (req, res) => {
+const mongoose = require('mongoose');
 
-    res.render('workspaces/index', {
-        //db.current_user.workspaces
-        workspaces: [
-            {
-            id: 'testWorkspaceId01',
-            name: 'testWorkspaceName01',
-            description : 'testWorkspaceName01 is the best workspace ever! \n Because testWorkspace is in the best blockchain network which is provided by Chaining.',
-            scope: 'public',
-            type: 'Ethereum',
-            createdAt: new Date().toDateString(),
-            userName: 'testUserName01'
-            },
-            {
-            id: 'testWorkspaceId02',
-            name: 'testWorkspaceName02',
-            description : 'testWorkspaceName02 is the best workspace ever! \n Because testWorkspace is in the best blockchain network which is provided by Chaining.',
-            scope: 'public',
-            type: 'Hyperledger',
-            createdAt: new Date().toDateString(),
-            userName: 'testUserName01'
-            },
-            {
-            id: 'testWorkspaceId03',
-            name: 'testWorkspaceName03',
-            description : 'testWorkspaceName01 is the best workspace ever! \n Because testWorkspace is in the best blockchain network which is provided by Chaining.',
-            scope: 'private',
-            type: 'Ethereum',
-            createdAt: new Date().toDateString(),
-            userName: 'testUserName01'
-            }
-        ]
+var Workspace = mongoose.model('Workspace');
+
+exports.index = (req, res, callback) => {
+
+    var workspaces = [];
+
+    var setWorkspaces = function(param) {
+        workspaces = param;
+    }
+    // res.callbackWaitsForEmptyEventLoop = false;
+    Workspace.find().sort({ _id: -1 }).limit(20).lean().exec().then(function(result){
+        res.render('workspaces/index', {workspaces: result})
     });
+
+    // console.log(workspaces);
+    // res.render('workspaces/index', {
+
+        // workspaces : workspaces
+
+        //db.current_user.workspaces
+        // workspaces: [
+        //     {
+        //     id: 'testWorkspaceId01',
+        //     name: 'testWorkspaceName01',
+        //     description : 'testWorkspaceName01 is the best workspace ever! \n Because testWorkspace is in the best blockchain network which is provided by Chaining.',
+        //     scope: 'public',
+        //     type: 'Ethereum',
+        //     createdAt: new Date().toDateString(),
+        //     userName: 'testUserName01'
+        //     },
+        //     {
+        //     id: 'testWorkspaceId02',
+        //     name: 'testWorkspaceName02',
+        //     description : 'testWorkspaceName02 is the best workspace ever! \n Because testWorkspace is in the best blockchain network which is provided by Chaining.',
+        //     scope: 'public',
+        //     type: 'Hyperledger',
+        //     createdAt: new Date().toDateString(),
+        //     userName: 'testUserName01'
+        //     },
+        //     {
+        //     id: 'testWorkspaceId03',
+        //     name: 'testWorkspaceName03',
+        //     description : 'testWorkspaceName01 is the best workspace ever! \n Because testWorkspace is in the best blockchain network which is provided by Chaining.',
+        //     scope: 'private',
+        //     type: 'Ethereum',
+        //     createdAt: new Date().toDateString(),
+        //     userName: 'testUserName01'
+        //     }
+        // ]
+    // });
 }
 
 exports.show = (req, res) => {
@@ -52,9 +70,20 @@ exports.new = (req, res) => {
 }
 
 exports.create = (req, res) => {
-    // res.render('create', {title : 'Chaining'});
-    console.log(req.body.workspace_name);
-    res.redirect('/workspaces');
+
+    var workspace = new Workspace({name: req.body.name, description: req.body.description, scope: req.body.scope, type: req.body.type, createdAt: Date().toLocaleString()});
+
+    console.log(workspace);
+
+    workspace.save(function(err){
+        if(err){
+            console.error(err);
+        }
+        console.error("Workspace is successfully created");
+
+    });
+
+    res.redirect('/workspaces?toasts=Workspace Successfully Created.');
 }
 
 

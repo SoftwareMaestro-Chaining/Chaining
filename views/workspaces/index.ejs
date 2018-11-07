@@ -11,7 +11,7 @@
 				<a class="waves-effect waves-light btn-large animated infinite animation-rubberBand" href="/workspaces/new"><i class="mdi-content-add left"></i>New Workspace</a>
 			</div>
 		</div>
-	<% } %>
+	<% } else {%>
 	<% workspaces.forEach(function(workspace) { %>
 		<!-- blog card -->
 		<div class="col s12 m4 l2">
@@ -55,6 +55,6 @@
 	          	</div>
 	      	</div>
 	  	</div>
-	<% }); %>
+	<% })}; %>
 
 </div>

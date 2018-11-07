@@ -1,6 +1,11 @@
 const mongoose = require('mongoose');
 
+
 var User = mongoose.model('User');
+
+const jwt = require('jsonwebtoken');
+
+var util     = require('../../util');
 
 exports.index = (req, res) => {
 
@@ -52,7 +57,7 @@ exports.show = (req, res) => {
 }
 
 exports.new = (req, res) => {
-    res.render('users/sign_in', {toasts : req.query.toasts});
+    res.render('users/sign_in', {"title" : "Chaining"});
 }
 
 exports.create = (req, res) => {
@@ -67,8 +72,19 @@ exports.create = (req, res) => {
         // test a matching password
         user.comparePassword(password, function(err, isMatch) {
             if (err) throw err;
-            if (isMatch)
+            if (isMatch){
+                // var payload = {
+                //   _id : user._id,
+                //   username: user.username
+                // };
+                // var secretOrPrivateKey = process.env.JWT_SECRET;
+                // var options = {expiresIn: 60*60*24};
+                // jwt.sign(payload, secretOrPrivateKey, options, function(err, token){
+                //   if(err) return res.json(util.successFalse(err));
+                //   res.json(util.successTrue(token));
+                // });                
                 res.redirect('/workspaces?toasts=Successfully Signed-in.');
+            }
             else
                 res.redirect('/user/sign_in?toasts=Wrong Username or Password.\n Try Again.');
             // console.log('Password123:', isMatch); // -&gt; Password123: true

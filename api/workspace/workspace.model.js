@@ -7,7 +7,7 @@ const WorkspaceSchema = new Schema({
     scope: { type: String, required: true },
     type: { type: String, required: true },
     createdAt: { type: Date, required: true, default: Date.now },
-    user_id: { type: String, unique: true, required: true }
+    // user_id: { type: String, unique: true, required: true }
 });
 
 WorkspaceSchema.set('toJSON', { virtuals: true });
