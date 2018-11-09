@@ -18,7 +18,7 @@
 	    	<div class="blog-card">
 	        	<div class="card">
 	            	<div class="card-image waves-effect waves-block waves-light">
-	            		<a href="/workspaces/<%=workspace.id%>">
+	            		<a href="/workspaces/<%=workspace._id%>">
 	                		<img src="/images/<%=workspace.type.toLowerCase()%>-logo.png" alt="blog-img">
 	                	</a>
 	            	</div>
@@ -29,13 +29,13 @@
 	            	</ul>
 	            	<div class="card-content">
 	                	<p class="row">
-	                  		<span class="left"><a href=""><%= workspace.type %></a></span>
+	                  		<span class="left"><a href=""><%= workspace.type.charAt(0).toUpperCase() + workspace.type.slice(1) %></a></span>
 	                  		<span class="right">
 	                  			<i class="<% workspace.scope === 'private'? 'mdi-action-lock' : 'mdi-social-people' %>"></i>
 			                </span>
 	                	</p>
-	                	<h4 class="card-title grey-text text-darken-4"><a href="#" class="grey-text text-darken-4"><%= workspace.name.slice(0, 15) %>...</a></h4>
-	                	<p class="blog-post-content"><%= workspace.description.slice(0, 45) %>...</p>
+	                	<h4 class="card-title grey-text text-darken-4"><a href="/workspaces/<%=workspace._id%>" class="grey-text text-darken-4"><%= workspace.name.length>15? workspace.name.slice(0, 15)+'...' : workspace.name %></a></h4>
+	                	<p class="blog-post-content"><%= workspace.description.length>45? workspace.description.slice(0, 45)+'...' : workspace.description %></p>
 		                <div class="row">
 		                    <div class="col s3">
 		                    	<img src="/images/avatar.png" alt="" class="circle responsive-img valign profile-image">
@@ -45,7 +45,7 @@
 		                    </div>
 	                  	</div>
 	                  	<div class="row">
-	                    	<span class="col right"><%= workspace.createdAt %></span>
+	                    	<span class="col right"><%= workspace.createdAt.toDateString() %></span>
 	                	</div>
 	              	</div>
 	              	<div class="card-reveal">

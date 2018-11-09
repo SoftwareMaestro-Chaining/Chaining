@@ -7,12 +7,12 @@
           }
   </script>
       <!-- <div class="col s12 m6 l6"> -->
-        <kubernetes-topology-graph items="data.items" relations="data.relations" kinds="kinds"></kubernetes-topology-graph>
+        <kubernetes-topology-graph items="data.items" relations="data.relations" kinds="kinds" id="topology-toggle-item"></kubernetes-topology-graph>
       <!-- </div> -->
 
       <div class="col controls">
          <label id="selected_vertex"></label>
-         <button ng-click="poke()">Poke</button>
+         <button ng-click="poke()">Poke</button><br>
 
          <kubernetes-topology-icon kind="Pod">
            <svg class="kube-topology">
@@ -27,7 +27,7 @@
            </svg>
          </kubernetes-topology-icon>
          <label>Services</label>
-
+<br>
          <kubernetes-topology-icon kind="Node">
            <svg class="kube-topology">
              <use xlink:href="#vertex-Node" x="15" y="15"></use>
@@ -65,6 +65,9 @@
       </svg>
 </div>
 
+<button id="topology-toggle-btn" class="btn-classic mdi-action-aspect-ratio"><br>on/off</button>
+
+
     <script type="text/javascript">
 
         angular.module('exampleApp', ['kubernetesUI'])
@@ -92,6 +95,8 @@
                 });
             });
     </script>
+
+
 
     <!-- <script src="/scratch/test.jsonp"></script> -->
     <!-- JSONP data sets to load -->

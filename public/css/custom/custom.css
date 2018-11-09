@@ -20,42 +20,130 @@ WE WILL RELEASE FUTURE UPDATES SO IN ORDER TO NOT OVERWRITE YOUR STYLES IT'S BET
 
 
 /*start=========================================================================workspaces/topology-graph.ejs*/
+.btn-classic {
+    background: white;
+    border-radius: 5px;
+    border: 1px solid lightgray;
+  }
 
 .kube-topology {
   /*background-color: white;*/
   /*width: 100px;*/
 }
 
-kubernetes-topology-graph {
-  width: 600px;
-  height: 400px;
-  border: 30px solid lightgray;
-  border-radius: 15px;
-  bottom: 40px;
-  right: 0;
-  z-index: 100;
+@media all and (max-width: 320px) {
+  kubernetes-topology-graph {
+
+    height: 200px;
+    border: 10px solid lightgray;
+    border-radius: 10px;
+    bottom: 40px;
+    right: 0;
+    z-index: 100;
+  }
+
+  .controls {
+    position: fixed;
+    right: 0;
+    bottom: 0px;
+    left: auto;
+    z-index: 100;
+    width: 100%
+    height: 50%;
+  }
+
+  #topology-toggle-btn {
+    position: fixed;
+    bottom: 2px;
+    right: 2px;
+    z-index: 100;
+  }
+}
+
+@media all and (min-width: 321px) and (max-width: 768px) {
+  kubernetes-topology-graph {
+    height: 300px;
+    border: 20px solid lightgray;
+    border-radius: 15px;
+    bottom: 120px;
+    right: 0;
+    z-index: 100;
+  }
+  .controls {
+    position: fixed;
+    right: 0;
+    bottom: 0px;
+    left: auto;
+    z-index: 100;
+    width: 100%;
+  }
+
+  #topology-toggle-btn {
+    position: fixed;
+    bottom: 2px;
+    right: 2px;
+    z-index: 100;
+  }
+}
+
+@media all and (min-width: 769px) {
+  kubernetes-topology-graph {
+    width: 600px;
+    height: 400px;
+    border: 30px solid lightgray;
+    border-radius: 15px;
+    bottom: 130px;
+    right: 0;
+    z-index: 100;
+  }
+  .controls {
+    position: fixed;
+    width: 600px;
+    right: 0;
+    bottom: 0px;
+    left: auto;
+    z-index: 100;
+  }
+
+  #topology-toggle-btn {
+    position: fixed;
+    bottom: 2px;
+    right: 2px;
+    z-index: 100;
+
+  }
 }
 
 kubernetes-topology-graph > svg {
   background-color: rgba(1, 1, 1, 0.1);
-
-
 }
 
-.controls {
-  position: fixed;
-  width: 600px;
-  right: 0;
-  bottom: 0px;
-  left: auto;
-  z-index: 100;
-}
+
 
 .controls > label {
   color: dimgray;
 }
+
+#selected_vertex {
+  width: 100%;
+}
+
+#topology-toggle-btn {
+  position: fixed;
+  bottom: 2px;
+  right: 2px;
+  z-index: 100;
+  background: white;
+  /*width: 15%;*/
+  border-radius: 5px
+}
 /*end===========================================================================workspaces/topology-graph.ejs*/
 
+/*start=========================================================================workspaces/show.ejs*/
+.collection .collection-item.avatar {
+  min-height: unset !important;
+}
+/*end===========================================================================workspaces/show.ejs*/
 
 /*start=========================================================================workspaces/new.ejs*/
 .radio-img-selector input{

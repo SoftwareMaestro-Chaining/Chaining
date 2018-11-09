@@ -1,16 +1,41 @@
 <div id="modal_jupyter" class="modal modal-fixed-footer">
               <div class="modal-content">
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis
-                  aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis
-                  aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis
-                  aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis
-                  aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
-              </div>
+          <div class="card-panel">
+            <h4 class="header2">Create a new Jupyter</h4>
+              <div class="row">
+                <form class="col s12" action="/workspaces" method="post">
+                  <div class="row">
+                    <div class="input-field col s6">
+                      <input id="workspace_name" type="text" name="workspace_name">
+                      <label for="workspace_name">Name</label>
+                    </div>
+                    <div class="input-field col s6">
+                      <input id="workspace_name" type="text" name="workspace_description">
+                      <label for="workspace_name">Description</label>
+                    </div>
+                  </div>
+
+                  <div class="divider"></div>
+                  
+                  <div class="row">
+                    <div class="input-field col s6">
+                      <input id="workspace_name" type="text" name="workspace_endpoint">
+                      <label for="workspace_name">Endpoint</label>
+                    </div>
+                    <div class="input-field col s6">
+                      <input id="description" type="text" name="workspace_port">
+                      <label for="description">Port</label>
+                    </div>
+                  </div>
+
+                </form>
+               </div>
+            </div>
+          </div>
+
+
               <div class="modal-footer">
-                <a href="#" class="waves-effect waves-red btn-flat modal-action modal-close">Disagree</a>
-                <a href="#" class="waves-effect waves-green btn-flat modal-action modal-close">Agree</a>
+                <a href="#" class="waves-effect waves-red btn-flat modal-action modal-close">Submit</a>
+                <a href="#" class="waves-effect waves-green btn-flat modal-action modal-close">Cancel</a>
               </div>
 </div>

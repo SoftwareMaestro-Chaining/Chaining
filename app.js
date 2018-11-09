@@ -5,7 +5,8 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var engine = require('ejs-locals');
 var bodyParser = require('body-parser');
-var mongoose    = require('mongoose');
+var mongoose    = require('mongoose').set('debut', true);
+var morgan = require('morgan');
 
 var User = require('./api/user/user.model');
 var User = require('./api/workspace/workspace.model');
@@ -14,6 +15,9 @@ var User = require('./api/workspace/workspace.model');
 var homeRouter = require('./api/home/index');
 var workspaceRouter = require('./api/workspace/index');
 var userRouter = require('./api/user/index');
+var authRouter = require('./api/auth/index');
+
+var config = require('./config');
 
 var app = express();
 
@@ -25,7 +29,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 
-// getter of req parameter from any page
+// enables getter of req parameter from any page
 app.use(function(req, res, next) {
 
    res.locals.requestObject = {
@@ -63,6 +67,7 @@ app.use(function (req, res, next) {
 app.use('/', homeRouter);
 app.use('/users', userRouter);
 app.use('/workspaces', workspaceRouter);
+app.use('/auth', authRouter);
 
 
 
@@ -83,15 +88,24 @@ app.use(function(err, req, res, next) {
 });
 
 
-// CONNECT TO MONGODB SERVER
+// print the request log on console
+app.use(morgan('dev'))
+
+// set the secret key variable for jwt
+app.set('jwt-secret', config.JWT_SECRET)
+
+
+
+
+// connect to mongoDB server
 var db = mongoose.connection;
 db.on('error', console.error);
 db.once('open', function(){
-    // CONNECTED TO MONGODB SERVER
+    // connected to mongoDB server
     console.log("Connected to mongod server");
 });
 
-mongoose.connect('mongodb://localhost/chainingdb')
+mongoose.connect(config.MONGODB_URI)
   .then(res => console.log("Connected to DB"))
   .catch(err => console.log(err));
 

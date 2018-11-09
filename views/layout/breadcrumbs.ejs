@@ -1,11 +1,13 @@
-<!-- breadcrumbs start-->
+<!-- breadcrumbs start -->
 
 <% requestObject = typeof requestObject !== 'object' ? {} : requestObject %>
 <% apiUrl = requestObject.url.split('/') %>
-<% apiObjs = apiUrl[1] %>
-<% apiObj = apiObjs.substring(0, apiObjs.length - 1)%>
+<% apiObjs = apiUrl[1] %> <!--plural-->
+<% apiObj = apiObjs.substring(0, apiObjs.length - 1)%> <!--singular-->
 
-<% if (apiUrl[2]) { %>
+
+<!-- workspaces new show breadcrumbs -->
+<% if (apiUrl[1]==='workspaces' && apiUrl[2]) { %>
   <% workspace = typeof workspace !== 'object' ? {} : workspace %>
       <div id="breadcrumbs-wrapper">
           <!-- Search for small screen -->
@@ -15,12 +17,16 @@
           </div>
 
           <div class="container">
+
             <div class="row">
               <div class="col s12 m12 l12">
-                <h5 class="breadcrumbs-title"><%= workspace=='undefined'? workspace.name : apiUrl[2].toUpperCase() %></h5>
+                <h5 class="breadcrumbs-title">
+                  <%= workspace=='undefined'? apiUrl[2].toUpperCase() :workspace.name %>
+                  <a href="/workspaces" class="btn-classic mdi-hardware-keyboard-return"></a>
+                </h5>
                 <ol class="breadcrumbs">
                     <li><a href="/<%=apiObjs%>"><%=apiObjs.toUpperCase()%></a></li>
-                    <li><a href="#"><%= workspace=='undefined'? workspace.name : apiUrl[2].toUpperCase() %></a></li>
+                    <li><a href="#"><%= workspace=='undefined'? apiUrl[2].toUpperCase() : workspace.name %></a></li>
                     <!-- <li class="active">workspace.asset</li> -->
                 </ol>
               </div>
@@ -30,4 +36,4 @@
 <% } %>
 
 
-<!--breadcrumbs end
+<!-- breadcrumbs end  -->
