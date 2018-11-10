@@ -49,12 +49,11 @@ exports.create = (req, res, next) => {
         var options = {expiresIn: 60*60*24};
         jwt.sign(payload, secretOrPrivateKey, options, function(err, token){
           if(err) return res.json(util.successFalse(err));
-            res.cookie('signedToken', token, { maxAge: 86400 }).render('workspaces/index', {result : util.successTrue(token)});
+            res.cookie('signedToken', token, { maxAge: 1000*60*5 }).render('workspaces/index', {result : util.successTrue(token)});
 
             // res.cookie('signedToken', token).render('workspaces/index', {result : util.successTrue(token)});
             console.log(util.successTrue(token));
           // res.json(util.successTrue(token));
-          res.render
         });
       }
     });
@@ -64,11 +63,12 @@ exports.getCurrentUser = (req, res, next) => {
     User.findById(req.decoded._id)
     .exec(function(err,user){
       if(err||!user) return res.json(util.successFalse(err));
-      res.json(util.successTrue(user));
+      // res.json(util.successTrue(user));
     });
 }
 
 exports.refreshToken = (req, res, next) => {
+    console.log("####to refresh Token : "+req.decoded._id)
     User.findById(req.decoded._id)
     .exec(function(err,user){
       if(err||!user) return res.json(util.successFalse(err));
@@ -81,6 +81,8 @@ exports.refreshToken = (req, res, next) => {
         var options = {expiresIn: 60*60*24};
         jwt.sign(payload, secretOrPrivateKey, options, function(err, token){
           if(err) return res.json(util.successFalse(err));
+          console.log("####success refresh Token : "+token)
+          res.cookie('signedToken', token, { maxAge: 1000*60*5 })
           next()
           // res.json(util.successTrue(token));
         });
@@ -88,11 +90,13 @@ exports.refreshToken = (req, res, next) => {
     });
 }
 
-exports.delete = (req, res, next) => {
+exports.destroy = (req, res, next) => {
   
   try {res.clearCookie('signedToken') }
   catch(err) {
-    res.render('users/sign_in',
+    res.json(util.successFalse(err));
+  }
+  res.render('users/sign_in',
       {
         result : 
           {
@@ -101,6 +105,5 @@ exports.delete = (req, res, next) => {
             "errors": null
           }
     });
-  }
 }
  

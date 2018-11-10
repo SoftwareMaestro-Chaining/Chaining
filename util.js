@@ -50,7 +50,7 @@ util.isSignedIn = function(req,res,next){ //4
   if (!token) return res.json(util.successFalse(null,'token is required!'));
   else {
     jwt.verify(token, req.app.get('jwt-secret'), function(err, decoded) {
-      if(err) return res.json(util.successFalse(err));
+      if(err) return res.render('users/sign_in', {result : util.successFalse(err)});
       else{
         req.decoded = decoded;
         next();
