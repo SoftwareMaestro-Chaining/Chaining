@@ -16,6 +16,7 @@
                 <input id="description" type="text" name="description">
                 <label for="description">Description</label>
               </div>
+              <%= typeof result !== 'undefined' && typeof result.errors !== 'undefined' && typeof result.errors.name !== 'undefined'? result.errors.name.message : "" %>
             </div>
 
             <div class="divider"></div>
@@ -77,3 +78,5 @@
       </div>
     </div>
 </div>
+
+<%= typeof result !== "undefined"? JSON.stringify(result) : "" %>

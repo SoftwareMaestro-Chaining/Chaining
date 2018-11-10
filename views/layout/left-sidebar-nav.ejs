@@ -22,8 +22,8 @@
                             <li><a href="/users/sign_out"><i class="mdi-hardware-keyboard-tab"></i> Logout</a>
                             </li>
                         </ul>
-                        <a class="btn-flat dropdown-button waves-effect waves-light grey-text profile-btn" href="#" data-activates="profile-dropdown">홍길동<i class="mdi-navigation-arrow-drop-down right"></i></a>
-                        <p class="user-roal grey-text">chaining@soma.com</p>
+                        <a class="btn-flat dropdown-button waves-effect waves-light grey-text profile-btn" href="#" data-activates="profile-dropdown" id="left-sidebar-nav-username">홍길동<i class="mdi-navigation-arrow-drop-down right"></i></a>
+                        <p class="user-roal grey-text" id="left-sidebar-nav-email">chaining@soma.com</p>
                     </div>
                 </div>
                 </li>
@@ -41,3 +41,26 @@
             </ul>
             <a href="#" data-activates="slide-out" class="sidebar-collapse btn-floating btn-medium waves-effect waves-light hide-on-large-only cyan"><i class="mdi-navigation-menu"></i></a>
             </aside>
+<script>
+    function getCookie(cookie_name) {
+      var x, y;
+      var val = document.cookie.split(';');
+
+      for (var i = 0; i < val.length; i++) {
+        x = val[i].substr(0, val[i].indexOf('='));
+        y = val[i].substr(val[i].indexOf('=') + 1);
+        x = x.replace(/^\s+|\s+$/g, ''); // 앞과 뒤의 공백 제거하기
+        if (x == cookie_name) {
+          return unescape(y); // unescape로 디코딩 후 값 리턴
+        }
+      }
+    }
+
+    window.onload = function() {
+        var username = getCookie("username")
+        var email = getCookie("email")
+        document.getElementById("left-sidebar-nav-username").innerHTML = username;
+        document.getElementById("left-sidebar-nav-email").innerHTML = email;
+    }
+        
+</script>  

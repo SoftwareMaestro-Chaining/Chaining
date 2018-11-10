@@ -1,6 +1,10 @@
 const mongoose = require('mongoose');
 
 var Workspace = mongoose.model('Workspace');
+var User = mongoose.model('User');
+
+var util = require('../../util')
+
 
 exports.index = (req, res, callback) => {
 
@@ -10,10 +14,15 @@ exports.index = (req, res, callback) => {
         workspaces = param;
     }
     // res.callbackWaitsForEmptyEventLoop = false;
-    Workspace.find().sort({ _id: -1 }).limit(20).lean().exec().then(function(object){
-        res.render('workspaces/index', {workspaces: object})
-    });
+    // Workspace.find().sort({ _id: -1 }).limit(20).lean().exec().then(function(object){
+    //     res.render('workspaces/index', {workspaces: object})
+    // });
 
+
+Workspace.find({ user: mongoose.Types.ObjectId(req.cookies.userId)}).populate('user', 'username').exec().then((object) => {
+    console.log("####"+JSON.stringify(object))
+  res.render('workspaces/index', {workspaces: object})
+});
     // console.log(workspaces);
     // res.render('workspaces/index', {
 
@@ -71,19 +80,41 @@ exports.new = (req, res) => {
 
 exports.create = (req, res) => {
 
-    var workspace = new Workspace({name: req.body.name, description: req.body.description, scope: req.body.scope, type: req.body.type, createdAt: Date().toLocaleString()});
 
-    console.log(workspace);
+    var workspaceParam = req.body;
+    workspaceParam.createdAt = Date().toLocaleString();
 
-    workspace.save(function(err){
-        if(err){
-            console.error(err);
-        }
-        console.error("Workspace is successfully created");
+        workspaceParam.user = mongoose.Types.ObjectId(req.cookies.userId)
+        // console.log("$$$$"+req.cookies.userId)
+        // console.log("$$$$$$$$$"+JSON.stringify(workspaceParam))
 
-    });
+        Workspace.create(workspaceParam, function(err, workspace){
+            if (err||!workspace) 
+                res.json(err)
+                // res.json(util.successFalse(err))
+                // res.render('/workspaces/new', {result : util.successFalse(err), form: workspaceParam});
+            else
+                // res.json(util.successTrue())
+                res.render('/workspaces', {result : util.successTrue(workspace)});
+            // res.json(err||!user? util.successFalse(err): util.successTrue(user));
+        });
 
-    res.redirect('/workspaces?toasts=Workspace Successfully Created.');
+
+
+
+    // var workspace = new Workspace({name: req.body.name, description: req.body.description, scope: req.body.scope, type: req.body.type, createdAt: Date().toLocaleString(), user: res.cookie.userId});
+
+    // console.log(workspace);
+
+    // workspace.save(function(err){
+    //     if(err){
+    //         console.error(err);
+    //     }
+    //     console.error("Workspace is successfully created");
+
+    // });
+
+    // res.redirect('/workspaces?toasts=Workspace Successfully Created.');
 }
 
 

@@ -35,8 +35,8 @@ const UserSchema = new Schema({
         required: [true,'Password is required!'],
         select:false
     },
-    createdAt: { type: String, required: true, default: Date().toLocaleString() }
-    // workspaces: [{ type: Schema.Types.ObjectId, ref: 'Workspace' }],
+    createdAt: { type: String, required: true, default: Date().toLocaleString() },
+    workspaces: [{ type: Schema.Types.ObjectId, ref: 'Workspace' }],
     },{
         toObject:{virtuals:true}
 });

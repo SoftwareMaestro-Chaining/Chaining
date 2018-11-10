@@ -33,6 +33,8 @@ util.parseError = function(errors){
     parsed.username = { message:'This username already exists!' };
     if (errors.errmsg.indexOf('email') > 0)
     parsed.email = { message:'This email already exists!'};
+    if (errors.errmsg.indexOf('name') > 0)
+    parsed.name = { message:'This name already exists!'};
   } else {
     parsed.unhandled = errors;
   }
@@ -47,7 +49,7 @@ util.isSignedIn = function(req,res,next){ //4
 
   // var token = req.headers['x-access-token'];
   var token = req.cookies.signedToken;
-  if (!token) return res.json(util.successFalse(null,'token is required!'));
+  if (!token) return res.render('users/sign_in',{result :util.successFalse(null,'token is required!')});
   else {
     jwt.verify(token, req.app.get('jwt-secret'), function(err, decoded) {
       if(err) return res.render('users/sign_in', {result : util.successFalse(err)});

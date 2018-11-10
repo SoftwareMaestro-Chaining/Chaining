@@ -34,7 +34,7 @@ exports.createValidate = (req, res, next) => {
 
 exports.create = (req, res, next) => {
     User.findOne({username:req.body.username})
-    .select({password:1, username:1, name:1, email:1})
+    .select({password:1, username:1, email:1})
     .exec(function(err, user){
       if(err) return res.json(util.successFalse(err));
       else if(!user||!user.comparePassword(req.body.password))
@@ -49,6 +49,10 @@ exports.create = (req, res, next) => {
         var options = {expiresIn: 60*60*24};
         jwt.sign(payload, secretOrPrivateKey, options, function(err, token){
           if(err) return res.json(util.successFalse(err));
+
+            res.cookie('userId', user._id, { maxAge: 1000*60*5 })
+            res.cookie('username', user.username, { maxAge: 1000*60*5 })
+            res.cookie('email', user.email, { maxAge: 1000*60*5 })
             res.cookie('signedToken', token, { maxAge: 1000*60*5 }).render('workspaces/index', {result : util.successTrue(token)});
 
             // res.cookie('signedToken', token).render('workspaces/index', {result : util.successTrue(token)});
@@ -82,6 +86,9 @@ exports.refreshToken = (req, res, next) => {
         jwt.sign(payload, secretOrPrivateKey, options, function(err, token){
           if(err) return res.json(util.successFalse(err));
           console.log("####success refresh Token : "+token)
+          res.cookie('userId', user._id, { maxAge: 1000*60*5 })
+          res.cookie('username', user.username, { maxAge: 1000*60*5 })
+          res.cookie('email', user.email, { maxAge: 1000*60*5 })
           res.cookie('signedToken', token, { maxAge: 1000*60*5 })
           next()
           // res.json(util.successTrue(token));
@@ -92,7 +99,7 @@ exports.refreshToken = (req, res, next) => {
 
 exports.destroy = (req, res, next) => {
   
-  try {res.clearCookie('signedToken') }
+  try {res.clearCookie('signedToken'); res.clearCookie('_id'); res.clearCookie('username') ; res.clearCookie('email')}
   catch(err) {
     res.json(util.successFalse(err));
   }
