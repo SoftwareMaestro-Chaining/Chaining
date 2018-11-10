@@ -10,68 +10,38 @@ exports.index = (req, res, callback) => {
 
     var workspaces = [];
 
-    var setWorkspaces = function(param) {
-        workspaces = param;
-    }
-    // res.callbackWaitsForEmptyEventLoop = false;
-    // Workspace.find().sort({ _id: -1 }).limit(20).lean().exec().then(function(object){
-    //     res.render('workspaces/index', {workspaces: object})
-    // });
+    // var setWorkspaces = function(param) {
+    //     workspaces = param;
+    // }
 
 
-Workspace.find({ user: mongoose.Types.ObjectId(req.cookies.userId)}).populate('user', 'username').exec().then((object) => {
-    console.log("####"+JSON.stringify(object))
-  res.render('workspaces/index', {workspaces: object})
-});
-    // console.log(workspaces);
-    // res.render('workspaces/index', {
-
-        // workspaces : workspaces
-
-        //db.current_user.workspaces
-        // workspaces: [
-        //     {
-        //     id: 'testWorkspaceId01',
-        //     name: 'testWorkspaceName01',
-        //     description : 'testWorkspaceName01 is the best workspace ever! \n Because testWorkspace is in the best blockchain network which is provided by Chaining.',
-        //     scope: 'public',
-        //     type: 'Ethereum',
-        //     createdAt: new Date().toDateString(),
-        //     userName: 'testUserName01'
-        //     },
-        //     {
-        //     id: 'testWorkspaceId02',
-        //     name: 'testWorkspaceName02',
-        //     description : 'testWorkspaceName02 is the best workspace ever! \n Because testWorkspace is in the best blockchain network which is provided by Chaining.',
-        //     scope: 'public',
-        //     type: 'Hyperledger',
-        //     createdAt: new Date().toDateString(),
-        //     userName: 'testUserName01'
-        //     },
-        //     {
-        //     id: 'testWorkspaceId03',
-        //     name: 'testWorkspaceName03',
-        //     description : 'testWorkspaceName01 is the best workspace ever! \n Because testWorkspace is in the best blockchain network which is provided by Chaining.',
-        //     scope: 'private',
-        //     type: 'Ethereum',
-        //     createdAt: new Date().toDateString(),
-        //     userName: 'testUserName01'
-        //     }
-        // ]
-    // });
+    Workspace.find({ user: mongoose.Types.ObjectId(req.cookies.userId)}).populate('user', 'username').exec().then((object) => {
+        console.log("####"+JSON.stringify(object))
+      res.render('workspaces/index', {workspaces: object})
+    });
 }
 
 exports.show = (req, res) => {
 
-    res.render('workspaces/show', {
-        workspace: {
-            id: 'testWorkspaceId01',
-            name: 'testWorkspaceName01',
-            description : 'testWorkspaceName01 is the best workspace ever! \n Because testWorkspace is in the best blockchain network which is provided by Chaining.',
-            type: 'Ethereum',
-            createdAt: new Date().toDateString()
-        }
+    var workspaceId = req.params.workspaceId
+
+    Workspace.findById(workspaceId).exec().then((object)=>{
+
+        console.log("######"+object)
+        res.render('workspaces/show', {
+            workspace : object
+        })        
     });
+
+    // res.render('workspaces/show', {
+    //     workspace: {
+    //         id: 'testWorkspaceId01',
+    //         name: 'testWorkspaceName01',
+    //         description : 'testWorkspaceName01 is the best workspace ever! \n Because testWorkspace is in the best blockchain network which is provided by Chaining.',
+    //         type: 'Ethereum',
+    //         createdAt: new Date().toDateString()
+    //     }
+    // });
 }
 
 exports.new = (req, res) => {
@@ -99,22 +69,6 @@ exports.create = (req, res) => {
             // res.json(err||!user? util.successFalse(err): util.successTrue(user));
         });
 
-
-
-
-    // var workspace = new Workspace({name: req.body.name, description: req.body.description, scope: req.body.scope, type: req.body.type, createdAt: Date().toLocaleString(), user: res.cookie.userId});
-
-    // console.log(workspace);
-
-    // workspace.save(function(err){
-    //     if(err){
-    //         console.error(err);
-    //     }
-    //     console.error("Workspace is successfully created");
-
-    // });
-
-    // res.redirect('/workspaces?toasts=Workspace Successfully Created.');
 }
 
 

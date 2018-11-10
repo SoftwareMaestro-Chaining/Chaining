@@ -53,7 +53,9 @@ exports.create = (req, res, next) => {
             res.cookie('userId', user._id, { maxAge: 1000*60*5 })
             res.cookie('username', user.username, { maxAge: 1000*60*5 })
             res.cookie('email', user.email, { maxAge: 1000*60*5 })
-            res.cookie('signedToken', token, { maxAge: 1000*60*5 }).render('workspaces/index', {result : util.successTrue(token)});
+            res.cookie('signedToken', token, { maxAge: 1000*60*5 })
+            res.redirect('/workspaces');
+            // res.cookie('signedToken', token, { maxAge: 1000*60*5 }).render('workspaces/index', {result : util.successTrue(token)});
 
             // res.cookie('signedToken', token).render('workspaces/index', {result : util.successTrue(token)});
             console.log(util.successTrue(token));
@@ -99,7 +101,7 @@ exports.refreshToken = (req, res, next) => {
 
 exports.destroy = (req, res, next) => {
   
-  try {res.clearCookie('signedToken'); res.clearCookie('_id'); res.clearCookie('username') ; res.clearCookie('email')}
+  try {res.clearCookie('signedToken'); res.clearCookie('_id'); res.clearCookie('username') ; res.clearCookie('email') ; res.clearCookie('userId')}
   catch(err) {
     res.json(util.successFalse(err));
   }

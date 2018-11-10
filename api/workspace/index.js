@@ -4,6 +4,9 @@ const controller = require('./workspace.controller');
 var util = require('../../util');
 
 const controller_auth = require('../user/auth.controller');
+const controller_remix = require('./remix.controller');
+const controller_jupyter = require('./jupyter.controller');
+const controller_ethereum = require('./ethereum.controller');
 
 
 //workspaces index
@@ -28,10 +31,10 @@ router.get('/:workspaceId', util.isSignedIn, controller_auth.refreshToken, contr
 // router.delete('/:id', controller.destroy);
 
 // workspace/remix create
-// router.get('/:workspaceId/:remixId', controller.createRemix)
+router.post('/:workspaceId/:remixId', util.isSignedIn, controller_auth.refreshToken, controller_remix.create)
 
 // workspace/remix show
-// router.get('/:workspaceId/:remixId', controller.showRemix)
+router.get('/:workspaceId/:remixId', util.isSignedIn, controller_auth.refreshToken, controller_remix.show)
 
 // workspace/jupyter create
 // router.get('/:workspaceId/jupyterId', controller.createJupyter)

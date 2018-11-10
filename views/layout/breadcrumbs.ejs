@@ -1,38 +1,38 @@
 <!-- breadcrumbs start -->
 
+
+
 <% requestObject = typeof requestObject !== 'object' ? {} : requestObject %>
 <% apiUrl = requestObject.url.split('/') %>
 <% apiObjs = apiUrl[1] %> <!--plural-->
 <% apiObj = apiObjs.substring(0, apiObjs.length - 1)%> <!--singular-->
 
-
 <!-- workspaces new show breadcrumbs -->
 <% if (apiUrl[1]==='workspaces' && apiUrl[2]) { %>
-  <% workspace = typeof workspace !== 'object' ? {} : workspace %>
-      <div id="breadcrumbs-wrapper">
-          <!-- Search for small screen -->
-          <div class="header-search-wrapper grey hide-on-large-only">
-              <i class="mdi-action-search active"></i>
-              <input type="text" name="Search" class="header-search-input z-depth-2" placeholder="">
-          </div>
-
-          <div class="container">
-
-            <div class="row">
-              <div class="col s12 m12 l12">
-                <h5 class="breadcrumbs-title">
-                  <%= workspace==={}? apiUrl[2].toUpperCase() :workspace.name %>
-                  <a href="/workspaces" class="btn-classic mdi-hardware-keyboard-return"></a>
-                </h5>
-                <ol class="breadcrumbs">
-                    <li><a href="/<%=apiObjs%>"><%=apiObjs.toUpperCase()%></a></li>
-                    <li><a href="#"><%= typeof workspace==={}? apiUrl[2].toUpperCase() : workspace.name %></a></li>
-                    <!-- <li class="active">workspace.asset</li> -->
-                </ol>
-              </div>
-            </div>
-          </div>
+  <div id="breadcrumbs-wrapper">
+      <!-- Search for small screen -->
+      <div class="header-search-wrapper grey hide-on-large-only">
+          <i class="mdi-action-search active"></i>
+          <input type="text" name="Search" class="header-search-input z-depth-2" placeholder="">
       </div>
+
+      <div class="container">
+
+        <div class="row">
+          <div class="col s12 m12 l12">
+            <h5 class="breadcrumbs-title">
+              <%= typeof workspace =="undefined"? apiUrl[2].toUpperCase() : workspace.name %>
+              <a href="/workspaces" class="btn-classic mdi-hardware-keyboard-return"></a>
+            </h5>
+            <ol class="breadcrumbs">
+                <li><a href="/<%=apiObjs%>"><%=apiObjs.toUpperCase()%></a></li>
+                <li><a href="#"><%= typeof workspace =="undefined"? apiUrl[2].toUpperCase() : workspace.name %></a></li>
+                <!-- <li class="active">workspace.asset</li> -->
+            </ol>
+          </div>
+        </div>
+      </div>
+  </div>
 <% } %>
 
 
