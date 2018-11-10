@@ -10,8 +10,8 @@ exports.index = (req, res, callback) => {
         workspaces = param;
     }
     // res.callbackWaitsForEmptyEventLoop = false;
-    Workspace.find().sort({ _id: -1 }).limit(20).lean().exec().then(function(result){
-        res.render('workspaces/index', {workspaces: result})
+    Workspace.find().sort({ _id: -1 }).limit(20).lean().exec().then(function(object){
+        res.render('workspaces/index', {workspaces: object})
     });
 
     // console.log(workspaces);

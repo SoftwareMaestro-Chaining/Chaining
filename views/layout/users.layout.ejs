@@ -44,8 +44,6 @@
   </div>
   <!-- End Page Loading -->
 
-
-
 							<%- body %>
 
 
@@ -68,23 +66,25 @@
     <!--custom-script.js - Add your own theme custom JS-->
     <script type="text/javascript" src="/js/custom-script.js"></script>
 
-  <script>
-const urlParams = new URLSearchParams(window.location.search);
-const toasts = urlParams.get('toasts');
 
-    // var toasts = getParameterByName(toasts);
+<% if (typeof result !== 'undefined'){ %>
+    <% if (result.success) {%>
+      <script>
+        Materialize.toast('<span>Success!</span>', 1500);
+      </script>
+    <% } else { %>
+      <% var errs = result.errors%>
+      <% var msg = result.message %>
+        <% if (errs) { %>
+          <script> Materialize.toast('<span><%=typeof errs.username !== "undefined"? errs.username.message : errs.password.message%></span>', 1500);</script>
+        <% } %>
+        <% if (msg) { %>
+          <script>Materialize.toast('<span><%=msg%></span>', 1500);</script>
+        <% } %>
+      </script>
+    <% } %>
+<% } %>
 
-    if(toasts) {runToasts(toasts)}
-    
-    function runToasts(toasts){
-
-          // toasts.forEach( function(toast) {
-            Materialize.toast('<span>'+toasts+'</span>', 1500);
-          // });
-    }
-
-
-  </script>
 
 </body>
 

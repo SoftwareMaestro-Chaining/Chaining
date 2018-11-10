@@ -7,6 +7,7 @@ var engine = require('ejs-locals');
 var bodyParser = require('body-parser');
 var mongoose    = require('mongoose').set('debut', true);
 var morgan = require('morgan');
+// var authenticate = require('./authenticate')
 
 var User = require('./api/user/user.model');
 var User = require('./api/workspace/workspace.model');
@@ -15,7 +16,6 @@ var User = require('./api/workspace/workspace.model');
 var homeRouter = require('./api/home/index');
 var workspaceRouter = require('./api/workspace/index');
 var userRouter = require('./api/user/index');
-var authRouter = require('./api/auth/index');
 
 var config = require('./config');
 
@@ -54,6 +54,7 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+// app.use(authenticate.authenticate);
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(function (req, res, next) {
@@ -63,11 +64,9 @@ app.use(function (req, res, next) {
   next();
 });
 
-
 app.use('/', homeRouter);
 app.use('/users', userRouter);
 app.use('/workspaces', workspaceRouter);
-app.use('/auth', authRouter);
 
 
 

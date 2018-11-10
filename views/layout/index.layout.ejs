@@ -78,25 +78,14 @@
     <script type="text/javascript" src="/js/plugins.js"></script>
     <!--custom-script.js - Add your own theme custom JS-->
     <script type="text/javascript" src="/js/custom-script.js"></script>
-    
-    <script>
-const urlParams = new URLSearchParams(window.location.search);
-const toasts = urlParams.get('toasts');
-
-    // var toasts = getParameterByName(toasts);
-
-    if(toasts) {runToasts(toasts)}
-    
-    function runToasts(toasts){
-
-          // toasts.forEach( function(toast) {
-            Materialize.toast('<span>'+toasts+'</span>', 1500);
-          // });
-    }
 
 
-    
-    </script>
+<% if (typeof result !== 'undefined' && result.success) { %>
+     <script>
+        Materialize.toast('<span>Success!</span>', 1500);   
+     </script>
+<% } %>    
+
 
 	</body>
 </html>

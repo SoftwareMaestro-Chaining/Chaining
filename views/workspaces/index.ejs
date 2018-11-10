@@ -2,7 +2,7 @@
 
 <div class="row">
 	
-	<% if (workspaces.length == 0) {%>
+	<% if (typeof workspaces ==  'undefined') {%>
 		<br><br><br><br><br>
 		<div class="col s12 m12 l12">
 			<p class="caption center bold">NO WORKSPACE YET</p>
@@ -12,7 +12,7 @@
 			</div>
 		</div>
 	<% } else {%>
-	<% workspaces.forEach(function(workspace) { %>
+		<% workspaces.forEach(function(workspace) { %>
 		<!-- blog card -->
 		<div class="col s12 m4 l2">
 	    	<div class="blog-card">

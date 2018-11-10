@@ -3,22 +3,18 @@ var router = express.Router();
 
 
 
-const login_controller = require('./user.login.controller');
-const registration_controller = require('./user.registration.controller');
+const controller_auth = require('./auth.controller');
+const controller_user = require('./user.controller');
 
 
+router.get('/sign_up', controller_user.new);
+
+router.post('/', controller_user.create);
+
+router.get('/sign_in', controller_auth.new);
+
+router.post('/sign_in', controller_auth.createValidate, controller_auth.create);
 
 
-router.get('/sign_in', login_controller.new);
-
-
-router.post('/sign_in', login_controller.create);
-// router.get('/sign_in', function(req, res, next) {
-//   res.render('users/sign_in', {title : 'Chaining'})
-// });
-
-router.get('/sign_up', registration_controller.new);
-
-router.post('/', registration_controller.create);
 
 module.exports = router;

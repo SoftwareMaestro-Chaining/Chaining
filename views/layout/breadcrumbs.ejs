@@ -21,12 +21,12 @@
             <div class="row">
               <div class="col s12 m12 l12">
                 <h5 class="breadcrumbs-title">
-                  <%= workspace=='undefined'? apiUrl[2].toUpperCase() :workspace.name %>
+                  <%= workspace==={}? apiUrl[2].toUpperCase() :workspace.name %>
                   <a href="/workspaces" class="btn-classic mdi-hardware-keyboard-return"></a>
                 </h5>
                 <ol class="breadcrumbs">
                     <li><a href="/<%=apiObjs%>"><%=apiObjs.toUpperCase()%></a></li>
-                    <li><a href="#"><%= workspace=='undefined'? apiUrl[2].toUpperCase() : workspace.name %></a></li>
+                    <li><a href="#"><%= typeof workspace==={}? apiUrl[2].toUpperCase() : workspace.name %></a></li>
                     <!-- <li class="active">workspace.asset</li> -->
                 </ol>
               </div>

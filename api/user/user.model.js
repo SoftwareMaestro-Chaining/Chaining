@@ -9,6 +9,7 @@ var emailRegex = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
 var emailRegexErrorMessage = 'Email is not valid!'
 var passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,16}$/;
 var passwordRegexErrorMessage = 'Password should be minimum 8 characters of alphabet and number combination!';
+
 const toLower =  (str) => {
     return str.toLowerCase();
 }
@@ -71,6 +72,11 @@ UserSchema.path("password").validate(function(v) {
         if(user.password !== user.passwordConfirmation) {
             user.invalidate("passwordConfirmation", "Password Confirmation does not matched!");
         }
+        if(!passwordRegex.test(user.password)){
+          user.invalidate('password', passwordRegexErrorMessage);
+        } else if(user.password !== user.passwordConfirmation) {
+          user.invalidate('passwordConfirmation', 'Password Confirmation does not matched!');
+        }        
     }
 
     // update user
@@ -87,26 +93,6 @@ UserSchema.path("password").validate(function(v) {
     }
 });
 
-
-// create new User document
- UserSchema.statics.create = function(username, email, password, passwordConfirmation, createdAt) {
- 	const user = new this({
- 		username,
- 		email,
- 		password,
- 		createdAt
- 	})
-
- 	// return the Promise
- 	return user.save()
-        .then(function(callback) {
-        // res.json(callback);
-        console.log(callback);
-    }).catch(function(error){
-        console.log('Error saving the user : '+error);
-    });
- }
-
  // find one user by using username
  UserSchema.statics.findOneByUsername = function(username) {
  	return this.findOne({
@@ -120,8 +106,6 @@ UserSchema.path("password").validate(function(v) {
  }
 
  // verify the hash of the User
-
-
 UserSchema.pre('save', function(next) {
     var user = this;
 
@@ -144,12 +128,13 @@ UserSchema.pre('save', function(next) {
 
 });
 
+// // model methods
+UserSchema.methods.comparePassword = function (password) {
+  var user = this;
+  console.log(password+" : "+user.password);
+  console.log( bcrypt.compareSync(password, user.password));
 
-UserSchema.methods.comparePassword = function(candidatePassword, callback) {
-    bcrypt.compare(candidatePassword, this.password, function(err, isMatch) {
-        if (err) return callback(err);
-        callback(null, isMatch);
-    });
+  return bcrypt.compareSync(password, user.password);
 };
 
 UserSchema.set('toJSON', { virtuals: true });

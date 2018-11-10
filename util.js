@@ -21,15 +21,18 @@ util.successFalse = function(err, message){ //2
   };
 };
 
-util.parseError = function(errors){ //3
+util.parseError = function(errors){
   var parsed = {};
   if(errors.name == 'ValidationError'){
     for(var name in errors.errors){
       var validationError = errors.errors[name];
       parsed[name] = { message:validationError.message };
     }
-  } else if(errors.code == '11000' && errors.errmsg.indexOf('username') > 0) {
+  } else if(errors.code == '11000') {
+    if (errors.errmsg.indexOf('username') > 0)
     parsed.username = { message:'This username already exists!' };
+    if (errors.errmsg.indexOf('email') > 0)
+    parsed.email = { message:'This email already exists!'};
   } else {
     parsed.unhandled = errors;
   }
@@ -38,11 +41,15 @@ util.parseError = function(errors){ //3
 
 
 // middlewares
-util.isLoggedin = function(req,res,next){ //4
-  var token = req.headers['x-access-token'];
+util.isSignedIn = function(req,res,next){ //4
+  // console.log(req.headers['signedToken']);
+  console.log(req.cookies.signedToken+"#####");
+
+  // var token = req.headers['x-access-token'];
+  var token = req.cookies.signedToken;
   if (!token) return res.json(util.successFalse(null,'token is required!'));
   else {
-    jwt.verify(token, process.env.JWT_SECRET, function(err, decoded) {
+    jwt.verify(token, req.app.get('jwt-secret'), function(err, decoded) {
       if(err) return res.json(util.successFalse(err));
       else{
         req.decoded = decoded;
@@ -51,5 +58,15 @@ util.isLoggedin = function(req,res,next){ //4
     });
   }
 };
+
+// private functions
+function checkPermission(req,res,next){ //*
+  User.findOne({username:req.params.username}, function(err,user){
+    if(err||!user) return res.json(util.successFalse(err));
+    else if(!req.decoded || user._id != req.decoded._id) 
+      return res.json(util.successFalse(null,'You don\'t have permission'));
+    else next();
+  });
+}
 
 module.exports = util;

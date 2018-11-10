@@ -11,47 +11,43 @@ exports.show = (req, res) => {
 }
 
 exports.new = (req, res) => {
-    res.render('users/sign_up', {title : 'Chaining'});
+    res.render('users/sign_up', {title : "chaining"});
 }
 
 exports.create = (req, res) => {
 
-    // var { username, email, password, passwordConfirmation } = req.body
     var userParam = req.body;
     userParam.createdAt = Date().toLocaleString();
 
-    // var user = null
-    // var user = new User({username: username, email: email, password: password, createdAt: Date().toLocaleString()});
+    User.create(userParam, function(err, user){
+        if (err||!user) 
+            res.render('users/sign_up', {result : util.successFalse(err), form: userParam});
+        else
+            res.render('users/sign_in', {result : util.successTrue(user)});
+        // res.json(err||!user? util.successFalse(err): util.successTrue(user));
 
-    // create a new user if does not exist
-    const create = (user) => {
-        if(user) {
-            var message = (userParam.username===user[0].username)? "The username exists" : "The email exists";
-            throw new Error(message);
-        } else {
-            return User.create(userParam, function(err, user){
-                if(err) return res.json(err);
-            });
-        }
-    }
+    });
+
+    // // create a new user if does not exist
+    // const create = (user) => {
+    //     if(user) {
+    //         var message = (userParam.username===user[0].username)? "The username exists" : "The email exists";
+    //         throw new Error(message);
+    //     } else {
+    //         return User.create(userParam, (err, user) => {
+    //             if(err) return res.json(err);
+    //         });
+    //     }
+    // }
 
     // run when there is an error (username exists)
-    const onError = (error) => {
-        res.json(util.successFalse(error, error.message))
-    }
+    // const onError = (error) => {
+    //     res.json(util.successFalse(error, error.message))
+    // }
 
-    User.findOneByUsernameOrEmail(userParam.username, userParam.email).then(create).catch(onError);
-
-    // user.save(function(err){
-    //     if(err){
-    //         console.error(err);
-    //     }
-    //     console.error("User is successfully created");
-
-    // });
+    // User.findOneByUsernameOrEmail(userParam.username, userParam.email).then(create).catch(onError);
 
     // res.redirect('/users/sign_in?toasts=Successfully Registered.');
-
 }
 
 
