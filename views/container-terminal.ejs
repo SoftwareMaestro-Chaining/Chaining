@@ -26,7 +26,7 @@
     <kubernetes-container-terminal pod="selfLink" container="containerName" prevent="preventSocket" rows="rows" cols="cols"  screen-keys="true" autofocus="true">
     </kubernetes-container-terminal>
     <!-- <%= title %> -->
-    <div>
+    <div style="display:none">
         <label>
             <span>Endpoint</span>
             <input type="text" class="form-control" ng-model="baseUrl"/>
@@ -60,12 +60,8 @@
             })
 
             .run(function($rootScope) {
-                // $rootScope.baseUrl = <%= baseUrl %>;
-                // $rootScope.selfLink = <%= selfLink %>;
-                // $rootScope.containerName = <%= containerName %>;
-                // $rootScope.accessToken = "";
-                // $rootScope.preventSocket = true;
-                $rootScope.baseUrl = "ws://localhost:8080";
+                
+                $rootScope.baseUrl = "ws://192.168.31.200:8080";
                 $rootScope.selfLink = "/api/v1/namespaces/default/pods/busybox";
                 $rootScope.containerName = "busybox";
                 $rootScope.accessToken = "";

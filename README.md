@@ -13,4 +13,5 @@ vagrant@kubemaster:~/Chaining$ npm -v
 <pre>
 vagrant@kubemaster:~/Chaining$ sudo apt-get install ansible -y
 
+vagrant@kubemaster:kubectl proxy  -p 8080 --disable-filter=true
 </pre>

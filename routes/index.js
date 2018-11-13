@@ -21,7 +21,15 @@ router.get('/graph', function(req, res, next) {
 });
 
 router.get('/terminal', function(req, res, next) {
-  res.render('container-terminal', {'title' : 'Chaining' })
+  console.log(req.query.ws_link)
+  let data = {
+    'title' : 'Chaining',
+    'endpoint':  req.query.endpoint ,
+    'podlink' : req.query.podlink ,
+    'container' : req.query.container ,
+  }
+  // console.log(req.params.ws_link)
+  res.render('container-terminal', data);
 });
 
 var controller = require('../controller');

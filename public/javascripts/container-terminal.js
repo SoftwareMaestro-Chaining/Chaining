@@ -44,11 +44,14 @@
             self.WebSocketFactory = function() {
                 return function ContainerWebSocket(url, protocols) {
                     if (url.indexOf("/") === 0) {
+                        let host = "192.168.31.200:8080";
+                        // let host = window.location.host ;
                         if (window.location.protocol === "http:")
-                            url = "ws://" + window.location.host + url;
+                            url = "ws://" + host + url;
                         else
-                            url = "wss://" + window.location.host + url;
+                            url = "wss://" + host + url;
                     }
+                    console.log(url)
                     return new window.WebSocket(url, protocols);
                 };
             };
@@ -155,37 +158,55 @@
                           }
                         };
 
-                        function connect() {
+                        console.log(document.URL)
+                        let url = new URL(document.URL);
+                        let searchParams = new URLSearchParams(url.search);
+                        console.log(searchParams.get('endpoint'));
+                        console.log(searchParams.get('podlink'));
+                        console.log(searchParams.get('container'));
+                        let endpoint = (searchParams.get('endpoint'));
+                        let podlink = (searchParams.get('podlink'));
+                        let container = (searchParams.get('container'));
+                        
+                        
+                        connect(endpoint, podlink, container);
+                        function connect(endpoint, podlink, container) {
                             disconnect();
-                            if($('#baseUrl').val()){
-                                scope.baseUrl = $('#baseUrl').val();
-                            }
-                            if($('#selfLink').val()){
-                                scope.selfLink = $('#selfLink').val();
-                            }
-                            if($('#containerName').val()){
-                                scope.selfLink = $('#containerName').val();
-                            }
+                            scope.baseUrl = endpoint
+                            scope.selfLink = podlink
+                            // scope.selfLink = container
+                            console.log(scope.baseUrl)
+                            // if($('#baseUrl').val()){
+                            //     scope.baseUrl = $('#baseUrl').val();
+                            // }
+                            // if($('#selfLink').val()){
+                            //     scope.selfLink = $('#selfLink').val();
+                            // }
+                            // if($('#containerName').val()){
+                            //     scope.selfLink = $('#containerName').val();
+                            // }
 
                             term.reset();
 
-                            var url = "";
-                            console.log(scope)
-                            var pod = scope.pod();
-                            if (pod.metadata)
-                                url += pod.metadata.selfLink;
-                            else
-                                url += pod;
+                            var url =  scope.selfLink;
+                            console.log(url)
+                            
+                            // var pod = scope.pod();
+                            // console.log(pod);
+                            // // if (pod.metadata)
+                            //     url += pod.metadata.selfLink;
+                            // else
+                            //     url += pod;
                             url += "/exec";
 
                             if (url.indexOf('?') === -1)
                                 url += '?';
                             url += "stdout=1&stdin=1&stderr=1&tty=1";
-
-                            var container = scope.container ? scope.container() : null;
-                            if (container)
+                            console.log(container)
+                            var container = container ;
+                            // if (container)
                                 url += "&container=" + encodeURIComponent(container);
-
+                            console.log(url)
                             var command = scope.command;
                             if (!command)
                                 command = [ "/bin/sh", "-i" ];
@@ -210,11 +231,12 @@
                                 scope.status = 'disconnected';
                                 scope.$apply(disconnect);
                             }
-
+                            // url  = <%= ws_link %>
+                            console.log(url)
                             $q.when(kubernetesContainerSocket(url, "base64.channel.k8s.io"),
                                 function resolved(socket) {
                                     ws = socket;
-
+                                    console.log(ws)
                                     ws.onopen = function(ev) {
                                         alive = window.setInterval(function() {
                                             ws.send("0");

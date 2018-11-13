@@ -41,11 +41,18 @@
             {
                 title: 'Exec the container',
                 action: function(element, d, i) {
-                    let $modal = $("#myModal");
-                    setExecConfig(element.item, $modal);
+                    let endpoint = "ws://192.168.31.200:8080";
+                    let podlink = "/api/v1/namespaces/default/pods/markdownrender-cf999cf5b-p72bb";
+                    let container = "markdownrender";
+                    // let ws_link = endpoint + podlink + container;
+                    location.replace("/terminal"+ "?endpoint=" + endpoint + "&podlink=" + podlink + "&container=" + container);
+                 
+
+                    // let $modal = $("#myModal");
+                    // setExecConfig(element.item, $modal);
                     
-                    $modal.modal();
-                    console.log(element);
+                    // $modal.modal();
+                    // console.log(element);
                     
                 }
             }
