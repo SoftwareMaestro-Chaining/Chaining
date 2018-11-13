@@ -3,26 +3,34 @@
   connection: local
   become: yes
   tasks:
+    - debug: msg="{{ workdir }}"
+
     - name: Create a user directory.
       become: yes
       file:
-        path: "{{ user.path }}"
+        path: "{{ workdir }}"
         state: "directory"
         recurse: "yes"
         # owner: "vagrant"
         # group: "vagrant"
         mode: "0777"
 
-    - name: Check that {{ envfile }} exists
-      stat:
-        path: "{{ envfile }}"
-    - name: Check that {{ k8s_yaml }} exists
-      stat:
-        path: "{{ k8s_yaml }}"
-    
+    # - name: Check that {{ linux-eth_eth-config.yaml }} exists
+    #   stat:
+    #     path: "{{ workdir }}/{{ linux-eth_eth-config.yaml }}"
+
+    # - name: Check that {{ k8s_yaml }} exists
+    #   stat:
+    #     path: "{{ workdir }}/{{ linux-eth_eth-config.yaml }}"
+    - debug: msg="{{ workdir }}/{ meta.eth }}"
+    - debug: msg="{{ workdir }}/{{ meta.k8s }}"
+    - debug: msg="{{ workdir }}/{{ item }}"
+      with_items : "{{ meta.toml }}"
+
     - name: Generate user ethereum yaml in ruby.
-      shell: ./eth "../{{ envfile }}" "../{{ k8s_yaml }}"
-      become: yes
-      args:
-         chdir: ./kuberneteth
+      shell: "../eth {{ workdir }}/{{ item }} {{ workdir }}/{{ k8s_yaml }}"
+      with_items : "{{ meta.toml }}"
+    #   become: yes
+    #   args:
+    #      chdir: ./kuberneteth
 

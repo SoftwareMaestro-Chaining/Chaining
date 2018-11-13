@@ -27,10 +27,7 @@
                         "NodeP2P_DiscoveryAddr":30303
                     }
                 }
-            },{
-                "test" : {}
             }
-       
         ],
     "monitor":{
         "name":"monitor",

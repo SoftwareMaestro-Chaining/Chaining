@@ -31,7 +31,7 @@ let miner_node_toml = (object.nodes).map((val, i)=>{
 
 // console.log(object.nodes);
 // console.log(test);
-var env = {
+var options = {
     'user' : {
       'id' : 'linux',
       'type' : 'eth' ,
@@ -41,22 +41,22 @@ var env = {
   
 }
 
-let config = getConfig(env);
+let env = getConfig(options);
 
-function getConfig(config){
-  if(config !== null && typeof config === 'object'){
-    let result = config;
+function getConfig(options){
+  if(options !== null && typeof options === 'object'){
+    let result = options;
     let prefix = '_';
     let miner_node_toml = (object.nodes).map((val, i)=>{
-      let stub = config.user.id + '-' + config.user.type ;
-      return (stub + Object.keys(val)[0] + ".yaml");
+      let stub = options.user.id + '-' + options.user.type ;
+      return (stub + Object.keys(val)[0] + ".toml");
       // return path.join(stub, Object.keys(val)[0] + ".yaml");
     });
-    result.path = path.join(config.workdir, config.name); 
+    result.path = path.join(options.workdir, options.name); 
 
     result.meta = {
-      'eth' : config.user.id + '-' + config.user.type + prefix + 'eth-config.yaml',
-      'k8s' : config.user.id + '-' + config.user.type + prefix + 'k8s.yaml',
+      'eth' : options.user.id + '-' + options.user.type + prefix + 'eth-config.yaml',
+      'k8s' : options.user.id + '-' + options.user.type + prefix + 'k8s.yaml',
       'toml' : miner_node_toml
     }
     return result;
@@ -64,20 +64,20 @@ function getConfig(config){
   return {};
 }
 
-console.log(config);
+console.log(env);
 
 env.ansible_sudo_pass = "1q2w3e!@#"
 // env.ansible_sudo_pass = "vagrant"
 
-// var command = new Ansible.Playbook().playbook('playbook')
-// 				.variables(env);
+var command = new Ansible.Playbook().playbook('playbook')
+				.variables(env);
 
 // // command.asSudo();
-// var promise = command.exec();
+var promise = command.exec();
 
-// promise.then((result)=>{
-// 	console.log(result.output);
-// }).catch((e)=>{
-// 	console.log(e);
-// });
+promise.then((result)=>{
+	console.log(result.output);
+}).catch((e)=>{
+	console.log(e);
+});
 
