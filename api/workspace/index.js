@@ -31,16 +31,28 @@ router.get('/:workspaceId', util.isSignedIn, controller_auth.refreshToken, contr
 // router.delete('/:id', controller.destroy);
 
 // workspace/remix create
-router.post('/:workspaceId/:remixId', util.isSignedIn, controller_auth.refreshToken, controller_remix.create)
+router.post('/:workspaceId/remixes/', util.isSignedIn, controller_auth.refreshToken, controller_remix.create)
 
 // workspace/remix show
-router.get('/:workspaceId/:remixId', util.isSignedIn, controller_auth.refreshToken, controller_remix.show)
+router.get('/:workspaceId/remixes/:remixId', util.isSignedIn, controller_auth.refreshToken, controller_remix.show)
 
-// workspace/jupyter create
-// router.get('/:workspaceId/jupyterId', controller.createJupyter)
+//workspace/jupyter create
+// router.post('/:workspaceId/jupyters', util.isSignedIn, controller_auth.refreshToken, controller_jupyter.create)
+router.post('/:workspaceId/jupyters', controller_jupyter.create)
 
-// workspace/jupyter show
-// router.get('/:workspaceId/jupyterId', controller.showJupyter)
+
+//workspace/jupyter show
+router.get('/:workspaceId/jupyters/:jupyterId', util.isSignedIn, controller_auth.refreshToken, controller_jupyter.show)
+
+//workspace/jupyter generate
+router.post('/generate/jupyters', function(req, res, next) {
+  // res.json({})
+  console.log("init generation jupyter");
+  req.body.app = 'jupyter'
+  require('../../generator')(req.body, (data)=>{
+    res.json(data);
+  })
+});
 
 
 module.exports = router;

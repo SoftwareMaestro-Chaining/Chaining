@@ -65,6 +65,7 @@
 	    
     <!-- jQuery Library -->
     <script type="text/javascript" src="/js/plugins/jquery-1.11.2.min.js"></script>    
+    <script type="text/javascript" src="/js/jQuery.form.min.js"></script>
     <!--materialize js-->
     <script type="text/javascript" src="/js/materialize.js"></script>
     <!--prism
@@ -80,6 +81,7 @@
     <script type="text/javascript" src="/js/custom-script.js"></script>
 
 
+
 <% if (typeof result !== 'undefined'){ %>
     <% if (result.success) {%>
       <script>
@@ -87,6 +89,7 @@
       </script>
     <% } else { %>
       <% var errs = result.errors%>
+
       <% var msg = result.message %>
         <% if (errs) { %>
           <script> Materialize.toast('<span><%=typeof errs.username !== "undefined"? errs.username.message : errs.password.message%></span>', 1500);</script>

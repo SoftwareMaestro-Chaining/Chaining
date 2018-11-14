@@ -1,8 +1,7 @@
 <% layout('../layout/index.layout') -%>
-
 <div class="row">
 	
-	<% if (typeof workspaces ==  'undefined' || !workspaces) {%>
+	<% if (typeof workspaces ==  'undefined' || workspaces.length==0) {%>
 		<br><br><br><br><br>
 		<div class="col s12 m12 l12">
 			<p class="caption center bold">NO WORKSPACE YET</p>
@@ -56,5 +55,8 @@
 	      	</div>
 	  	</div>
 	<% })}; %>
-
 </div>
+
+
+
+

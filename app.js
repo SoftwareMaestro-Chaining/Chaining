@@ -10,7 +10,7 @@ var morgan = require('morgan');
 // var authenticate = require('./authenticate')
 
 var User = require('./api/user/user.model');
-var User = require('./api/workspace/workspace.model');
+var Workspace = require('./api/workspace/workspace.model');
 
 
 var homeRouter = require('./api/home/index');
@@ -92,7 +92,7 @@ app.use(morgan('dev'))
 
 // set the secret key variable for jwt
 app.set('jwt-secret', config.JWT_SECRET)
-
+app.set('base-uri', config.BASE_URI)
 
 
 

@@ -54,20 +54,18 @@ exports.create = (req, res) => {
     var workspaceParam = req.body;
     workspaceParam.createdAt = Date().toLocaleString();
 
-        workspaceParam.user = mongoose.Types.ObjectId(req.cookies.userId)
-        // console.log("$$$$"+req.cookies.userId)
-        // console.log("$$$$$$$$$"+JSON.stringify(workspaceParam))
+    workspaceParam.user = mongoose.Types.ObjectId(req.cookies.userId)
 
-        Workspace.create(workspaceParam, function(err, workspace){
-            if (err||!workspace) 
-                res.json(err)
-                // res.json(util.successFalse(err))
-                // res.render('/workspaces/new', {result : util.successFalse(err), form: workspaceParam});
-            else
-                // res.json(util.successTrue())
-                res.render('/workspaces', {result : util.successTrue(workspace)});
-            // res.json(err||!user? util.successFalse(err): util.successTrue(user));
-        });
+    Workspace.create(workspaceParam, function(err, workspace){
+        if (err||!workspace) 
+            res.render('workspaces/new', {result : util.successFalse(err)});
+            // res.json(util.successFalse(err))
+            // res.render('/workspaces/new', {result : util.successFalse(err), form: workspaceParam});
+        else
+            // res.json(util.successTrue())
+            res.render('workspaces/index', {result : util.successTrue(workspace)});
+        // res.json(err||!user? util.successFalse(err): util.successTrue(user));
+    });
 
 }
 
