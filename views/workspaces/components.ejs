@@ -63,9 +63,11 @@
                                                 </div>
                                                 <div class="col s3">
                                                     <br>
-                                                    <div class="progress">
+<!--                                                     <div class="progress">
                                                          <div class="determinate" style="width: 70%"></div>   
-                                                    </div>                                         
+                                                    </div>  -->
+                                                    <a href="<%=IDE.url%>" class="btn-classic mdi-action-open-in-browser center" target="_blank"><br> Open </a>    
+                                                    <a href="/workspaces/<%=workspace._id%>/jupyters/<%=IDE.name.split('-')[0]%>?_method=DELETE" class="btn-classic mdi-action-delete center" data-method="delete"><br> Delete </a>                                   
                                                 </div>
                                             </div>
                                         </li>
@@ -110,7 +112,8 @@
 <!--                                                     <div class="progress">
                                                          <div class="determinate" style="width: 70%"></div>   
                                                     </div> -->             
-                                                    <a href="<%=IDE.url%>" class="btn-classic mdi-action-open-in-browser center" target="_blank"><br> Open </a>   
+                                                    <a href="<%=IDE.url%>" class="btn-classic mdi-action-open-in-browser center" target="_blank"><br> Open </a>  
+                                                    <a href="/workspaces/<%=workspace._id%>/remixs/<%=IDE.name.split('-')[0]%>?_method=DELETE" class="btn-classic mdi-action-delete center" data-method="delete"><br> Delete </a> 
                                                 </div>
                                             </div>
                                         </li>

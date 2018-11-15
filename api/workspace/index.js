@@ -11,6 +11,21 @@ const controller_jupyter = require('./jupyter.controller');
 const controller_ethereum = require('./ethereum.controller');
 const controller_component = require('./component.controller')
 
+router.use( function( req, res, next ) {
+    // this middleware will call for each requested
+    // and we checked for the requested query properties
+    // if _method was existed
+    // then we know, clients need to call DELETE request instead
+    if ( req.query._method == 'DELETE' ) {
+        // change the original METHOD
+        // into DELETE method
+        req.method = 'DELETE';
+        // and set requested url to /user/12
+        req.url = req.path;
+    }       
+    next(); 
+});
+
 //workspaces index
 router.get('/', util.isSignedIn, controller_auth.refreshToken, controller.index);
 
@@ -67,6 +82,9 @@ router.post('/generate/jupyters', function(req, res, next) {
   })
 });
 
+//workspace/jupyter destroy
+
+
 //workspace/remix generate
 router.post('/generate/remixs', function(req, res, next) {
   // res.json({})
@@ -77,7 +95,11 @@ router.post('/generate/remixs', function(req, res, next) {
   })
 });
 
+//workspace/jupyter delete
+router.delete('/:workspaceId/jupyters/:jupyterName', controller_jupyter.destroy)
 
+//workspace/remix delete
+router.delete('/:workspaceId/jupyters/:remixName', controller_remix.destroy)
 
 //workspace/jupyter create
 // router.post('/:workspaceId/jupyters', util.isSignedIn, controller_auth.refreshToken, controller_jupyter.create)

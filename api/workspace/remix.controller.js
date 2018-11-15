@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
 var rp = require('request-promise');
+var exec = require('child_process').exec;
+
 
 var Workspace = mongoose.model('Workspace');
 var User = mongoose.model('User');
@@ -50,6 +52,33 @@ exports.create = (req, res, callback) => {
     // });
 
 
+
+}
+
+exports.destroy = (req, res, callback) => {
+	// exec("ls -la", function(error, stdout, stderr) {
+	// 	  if (!error) {
+	// 	    // things worked!
+	// 	    console.log(stdout)
+	// 	  } else {
+	// 	    // things failed :(
+	// 	  }
+	// });
+	exec("kubectl delete -f ./generator/lib/"+req.params.remixName+"_template.yaml", (error, stdout, stderr) => {
+		if (!error) {
+			console.log(stdout)
+			exec("rm ./generator/lib/"+req.params.remixName+"_template.yaml", (error, stdout, stderr) => {
+				if (!error) {
+					console.log(stdout)
+					res.redirect("/workspaces/"+req.params.workspaceId)
+				} else {
+					console.log(stderr)
+				}
+			})
+		} else {
+			console.log(stderr)
+		}
+	});
 
 }
 
