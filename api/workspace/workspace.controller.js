@@ -1,22 +1,18 @@
 const mongoose = require('mongoose');
+var rp = require('request-promise');
+
 
 var Workspace = mongoose.model('Workspace');
 var User = mongoose.model('User');
 
 var util = require('../../util')
 
-
 exports.index = (req, res, callback) => {
 
     var workspaces = [];
 
-    // var setWorkspaces = function(param) {
-    //     workspaces = param;
-    // }
-
-
     Workspace.find({ user: mongoose.Types.ObjectId(req.cookies.userId)}).populate('user', 'username').exec().then((object) => {
-        console.log("####"+JSON.stringify(object))
+        // console.log("####"+JSON.stringify(object))
       res.render('workspaces/index', {workspaces: object})
     });
 }
@@ -25,13 +21,61 @@ exports.show = (req, res) => {
 
     var workspaceId = req.params.workspaceId
 
-    Workspace.findById(workspaceId).exec().then((object)=>{
+    var options = {
+        method: 'GET',
+        uri: req.app.get('base-uri')+'/workspaces/'+workspaceId+'/k8s.jsonp',
+        json: true, // Automatically stringifies the body to JSON
+        rejectUnauthorized: false
+    };
 
-        console.log("######"+object)
-        res.render('workspaces/show', {
-            workspace : object
-        })        
-    });
+    // console.log("#####"+options.uri)
+ 
+    rp(options)
+        .then(function (elems) {
+        // POST succeeded...
+
+
+            // console.log("******"+elems)
+            var pods = []
+            var podIds = Object.keys(elems)
+            // console.log("elems : "+JSON.strcingify(elems))
+
+            console.log("podIds : "+podIds)
+            podIds.forEach((podId)=>{
+                var elem = elems[podId]
+
+
+                console.log("elem#################\n"+JSON.stringify(elem))
+
+                var pod = {}
+
+                pod.name = elem.metadata.name
+                pod.kind = elem.kind
+                pod.app = elem.metadata.labels.app
+                pod.createdAt = elem.metadata.creationTimestamp
+                pod.url = "http://"+elem.status.hostIP
+                if (typeof elem.spec.containers[0].ports !== "undefined")
+                    pod.url += ":"+ elem.spec.containers[0].ports[0].hostPort
+                pods.push(pod)
+                // console.log("pods&&&&&&&&\n"+JSON.stringify(pods))
+                // console.log("&&&&&"+podId)
+                // console.log("&&&&&"+elems[podId].metadata.name)
+                // console.log("&&&&&"+elems[podId].kind)
+            })
+            Workspace.findById(workspaceId).exec().then((workspace)=>{
+                console.log("######"+workspace)
+                res.render('workspaces/show', {
+                    workspace : workspace,
+                    pods : pods
+                })        
+            });            
+        })
+        .catch(function (err) {
+        // POST failed...
+            res.json("err : "+err)
+        })
+
+
 
     // res.render('workspaces/show', {
     //     workspace: {

@@ -3,7 +3,7 @@ const config = require('kubernetes-client').config;
 
 const client = new Client({ config: config.fromKubeconfig(), version: '1.9' });
 
-async function main(callback) {
+async function pod(callback) {
     var ns = await client.api.v1.namespaces.get();
     //console.log(ns.body.items)
     var myns = ns.body.items.filter((item)=>{
@@ -59,7 +59,7 @@ async function getPod(ns){
 }
 var controller = {};
 controller.getListk8s = function(callback){
-    main(callback)
+    pod(callback)
 }
 var nodeMap = new Map()
 async function node(callback) {
@@ -84,11 +84,10 @@ function p(callback){
 	})
 }
 async function all(callback){
-var promises = [p(node), p(main)]
+var promises = [p(node), p(pod)]
     return Promise.all(promises).then((data)=>{
 	    var items = Object.assign({},data[0], data[1]);
-	    // console.log("####^^^"+result)
-        console.log("####^^^"+JSON.stringify(data[0]))
+        // console.log("####^^^"+JSON.stringify(data[0]))
 
 	    relations = relations.map((obj)=>{
 		    obj.source = nodeMap.get(obj.source) 
@@ -106,7 +105,7 @@ var promises = [p(node), p(main)]
     return new Promise((resolve, reject)=>{
         node((data)=>{resolve(data)})
     }).then((data)=>{
-        main((data)=>{ 
+        pod((data)=>{ 
 		console.log(data)
 		console.log("mai")
 		resolve(data)})

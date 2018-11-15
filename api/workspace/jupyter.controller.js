@@ -9,17 +9,17 @@ var util = require('../../util')
 
 exports.create = (req, res, callback) => {
 
-	const {name, description, endpoint, port} = req.body
+	const {name, description, workspaceId, port} = req.body
 
 	var jupyterParam = {
 		'id' : name,
-		'ws' : endpoint,
+		'ws' : workspaceId,
 		'port' : port
 	}
 
-	console.log("jupyter creation began")
+	// console.log("jupyter creation began")
 
-	console.log("$$$$$"+req.app.get('base-uri'))
+	// console.log("$$$$$"+req.app.get('base-uri'))
 	var options = {
 	    method: 'POST',
 	    uri: req.app.get('base-uri')+'/workspaces/generate/jupyters',
@@ -28,12 +28,15 @@ exports.create = (req, res, callback) => {
 	    rejectUnauthorized: false
 	};
 
-	console.log("#####"+options.uri)
+	// console.log("#####"+options.uri)
  
 	rp(options)
     	.then(function (parsedBody) {
         // POST succeeded...
-        	res.json("parsedBody : "+parsedBody)
+        	// res.render("/workspaces/"+workspaceId, )
+        	// res.json("parsedBody : "+JSON.stringify(parsedBody))
+			res.redirect("/workspaces/"+workspaceId)
+
     	})
     	.catch(function (err) {
         // POST failed...

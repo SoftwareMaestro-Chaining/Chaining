@@ -1,13 +1,12 @@
-components.back.ejs					<div id="component-collections">
+					<div id="component-collections">
                         <div class="row">
                             <div class="col s12 m12 l6">
                                 <ul id="projects-collection" class="collection">
                                     <li class="collection-item avatar">
                                     	<a class="btn-floating waves-effect btn modal-trigger light-blue right" href="#modal_ethereum"><i class="mdi-content-add left"></i></a>
                                         <i class="mdi-file-folder circle light-blue darken-2"></i>
-                                        <span class="collection-header">Ethereum</span>
-                                        <p>Your Favorites</p>
-                                        <div class="cirl"
+                                        <span class="collection-header strong">Blockchain Network</span>
+                                        <p>Compose your Ethereum / Hyperledger Network Nodes</p>
 
                                     </li>
                                     <li class="collection-item">
@@ -27,7 +26,7 @@ components.back.ejs					<div id="component-collections">
                                     
                                 </ul>
 
-                    			<% include ethereum_form %>
+                    			<% include forms/ethereum_form %>
 
                             </div>
                         </div>
@@ -35,10 +34,10 @@ components.back.ejs					<div id="component-collections">
                             <div class="col s12 m12 l6">
                                 <ul id="issues-collection" class="collection">
                                     <li class="collection-item avatar">
-                                    	<!-- <a class="btn-floating waves-effect btn modal-trigger red right" href="#modal_jupyter"><i class="mdi-content-add left"></i></a> -->
+                                    	<a class="btn-floating waves-effect btn modal-trigger red right" href="#modal_jupyter"><i class="mdi-content-add left"></i></a>
                                         <i class="mdi-file-folder circle red darken-2"></i>
-                                        <span class="collection-header">Jupyter</span>
-                                        <p>Assigned to you</p>
+                                        <span class="collection-header strong">dApp Service</span>
+                                        <p>Struct your Application View and Transactions</p>
                                     </li>
                                     <li class="collection-item">
                                         <div class="row">
@@ -74,7 +73,7 @@ components.back.ejs					<div id="component-collections">
                                     </li>
                                 </ul>
 
-                    			<% include jupyter_form %>
+                    			<% include forms/jupyter_form %>
 
                             </div>
                         </div>
@@ -82,10 +81,10 @@ components.back.ejs					<div id="component-collections">
                         	<div class="col s12 m12 l6">
                                 <ul id="issues-collection" class="collection">
                                     <li class="collection-item avatar">
-                                    	<!-- <a class="btn-floating waves-effect btn modal-trigger yellow right" href="#modal_jupyter"><i class="mdi-content-add left"></i></a> -->
+                                    	<a class="btn-floating waves-effect btn modal-trigger yellow right" href="#modal_remix"><i class="mdi-content-add left"></i></a>
                                         <i class="mdi-file-folder circle yellow darken-2"></i>
-                                        <span class="collection-header">Remix</span>
-                                        <p>Assigned to you</p>
+                                        <span class="collection-header strong">Smart Contract</span>
+                                        <p>Define your Service Logic</p>
                                     </li>
                                     <li class="collection-item">
                                         <div class="row">
@@ -122,7 +121,8 @@ components.back.ejs					<div id="component-collections">
                                     <li class="collection-item">
                                         <div class="row">
                                             <div class="col s7">
-                                                <a class="collections-title href="" target="_blank"><strong>#205</strong> Profile page css</a>
+                                                <a class="collections-title href="#" target="_blank"><strong>#205</strong> Profile page css</a>
+
                                                 <p class="collections-content">New Project </p>
                                             </div>
                                             <div class="col s2">                                                
@@ -135,11 +135,15 @@ components.back.ejs					<div id="component-collections">
                                     </li>
                                 </ul>
 
-                    			<% include remix_form %>
+                    			<% include forms/remix_form %>
 
                             </div>
                         </div>
 
 
                     </div>
+
+
+
+
 

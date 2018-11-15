@@ -22,25 +22,26 @@ router.get('/terminal', function(req, res, next) {
   res.render('container-terminal', {title : 'Chaining'})
 });
 
-var controller = require('../controller');
-router.get('/k8s.jsonp', function(req, res, next) {
-    controller.getListk8s((k8s)=>{
-      res.send('sink({"items":'+JSON.stringify(k8s)+'})');
-    });
-});
+// var controller = require('../controller');
+// router.get('/k8s.jsonp', function(req, res, next) {
+//     controller.getListk8s((k8s)=>{
+//       res.send('sink({"items":'+JSON.stringify(k8s)+'})');
+//     });
+// });
 
-router.get('/node.jsonp', function(req, res, next) {
-  controller.getListNode((k8s)=>{
-    res.send('sink({"items":'+JSON.stringify(k8s)+'})');
-  });
-});
+// router.get('/node.jsonp', function(req, res, next) {
+//   controller.getListNode((k8s)=>{
+//     res.send('sink({"items":'+JSON.stringify(k8s)+'})');
+//   });
+// });
 
-router.get('/all.jsonp', function(req, res, next) {
-  console.log("qwetq333wet")
-  controller.all((k8s)=>{
-    res.send('sink('+JSON.stringify(k8s)+')');
-  });
-});
+// router.get('/all.jsonp', function(req, res, next) {
+//   console.log("qwetq333wet")
+//   controller.all((k8s)=>{
+//     res.send('sink('+JSON.stringify(k8s)+')');
+//   });
+// });
+
 router.post('/generate/jupyter', function(req, res, next) {
   // res.json({});
   req.body.app = 'jupyter'

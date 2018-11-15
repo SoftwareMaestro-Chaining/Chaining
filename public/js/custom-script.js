@@ -30,16 +30,16 @@ WE WILL RELEASE FUTURE UPDATES SO IN ORDER TO NOT OVERWRITE YOUR CUSTOM SCRIPT I
 /*start=========================================================================workspaces/forms/jupyter_form.ejs*/
 
 
-$("#jupyterFormSubmitBtn").click('click', function(e) {
-  console.log("clicked");
-  $("#jupyter-form").ajaxSubmit({
-    success: function(response) {
-      $('.result').html(response);
-    }, error: function(e) {
-      $('.result').html(e);
-    }
-  });
-});
+// $("#jupyterFormSubmitBtn").click('click', function(e) {
+//   console.log("clicked");
+//   $("#jupyter-form").ajaxSubmit({
+//     success: function(response) {
+//       $('.result').html(response);
+//     }, error: function(e) {
+//       $('.result').html(e);
+//     }
+//   });
+// });
     // $("#jupyterFormSubmitBtn").click(function(e)
     // {
     //   console.log("clicked");

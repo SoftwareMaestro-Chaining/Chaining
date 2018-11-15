@@ -1,13 +1,15 @@
 var express = require('express');
 var router = express.Router();
-const controller = require('./workspace.controller');
 var util = require('../../util');
 
+
+
+const controller = require('./workspace.controller');
 const controller_auth = require('../user/auth.controller');
 const controller_remix = require('./remix.controller');
 const controller_jupyter = require('./jupyter.controller');
 const controller_ethereum = require('./ethereum.controller');
-
+const controller_component = require('./component.controller')
 
 //workspaces index
 router.get('/', util.isSignedIn, controller_auth.refreshToken, controller.index);
@@ -24,6 +26,31 @@ router.get('/new', util.isSignedIn, controller_auth.refreshToken, controller.new
 // workspace show
 router.get('/:workspaceId', util.isSignedIn, controller_auth.refreshToken, controller.show);
 
+
+// workspace get pod
+router.get('/:workspaceId/k8s.jsonp', function(req, res, next) {
+    controller_component.getListk8s((k8s)=>{
+      // res.send('sink({"items":'+JSON.stringify(k8s)+'})');
+      res.send(JSON.stringify(k8s));
+
+    });
+});
+
+// workspace get node
+router.get('/:workspaceId/node.jsonp', function(req, res, next) {
+  controller_component.getListNode((k8s)=>{
+    res.send('sink({"items":'+JSON.stringify(k8s)+'})');
+  });
+});
+
+
+// workspace get all components for topology
+router.get('/:workspaceId/all.jsonp', function(req, res, next) {
+  controller_component.all((k8s)=>{
+    res.send('sink('+JSON.stringify(k8s)+')');
+  });
+});
+
 // workspace update
 // router.put('/:id', controller.put);
 
@@ -36,14 +63,6 @@ router.post('/:workspaceId/remixes/', util.isSignedIn, controller_auth.refreshTo
 // workspace/remix show
 router.get('/:workspaceId/remixes/:remixId', util.isSignedIn, controller_auth.refreshToken, controller_remix.show)
 
-//workspace/jupyter create
-// router.post('/:workspaceId/jupyters', util.isSignedIn, controller_auth.refreshToken, controller_jupyter.create)
-router.post('/:workspaceId/jupyters', controller_jupyter.create)
-
-
-//workspace/jupyter show
-router.get('/:workspaceId/jupyters/:jupyterId', util.isSignedIn, controller_auth.refreshToken, controller_jupyter.show)
-
 //workspace/jupyter generate
 router.post('/generate/jupyters', function(req, res, next) {
   // res.json({})
@@ -54,5 +73,24 @@ router.post('/generate/jupyters', function(req, res, next) {
   })
 });
 
+//workspace/remix generate
+router.post('/generate/remixs', function(req, res, next) {
+  // res.json({})
+  console.log("init generation remix");
+  req.body.app = 'remix'
+  require('../../generator')(req.body, (data)=>{
+    res.json(data);
+  })
+});
+
+
+
+//workspace/jupyter create
+// router.post('/:workspaceId/jupyters', util.isSignedIn, controller_auth.refreshToken, controller_jupyter.create)
+router.post('/:workspaceId/jupyters', controller_jupyter.create)
+
+//workspace/remix create
+// router.post('/:workspaceId/remixs', util.isSignedIn, controller_auth.refreshToken, controller_remix.create)
+router.post('/:workspaceId/remixs', controller_remix.create)
 
 module.exports = router;
