@@ -57,12 +57,6 @@ router.get('/:workspaceId/all.jsonp', function(req, res, next) {
 // workspace delete
 // router.delete('/:id', controller.destroy);
 
-// workspace/remix create
-router.post('/:workspaceId/remixes/', util.isSignedIn, controller_auth.refreshToken, controller_remix.create)
-
-// workspace/remix show
-router.get('/:workspaceId/remixes/:remixId', util.isSignedIn, controller_auth.refreshToken, controller_remix.show)
-
 //workspace/jupyter generate
 router.post('/generate/jupyters', function(req, res, next) {
   // res.json({})

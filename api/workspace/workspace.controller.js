@@ -37,36 +37,57 @@ exports.show = (req, res) => {
 
             // console.log("******"+elems)
             var pods = []
+            var networkIDE = []
+            var dAppIDE = []
+            var contractIDE = []
             var podIds = Object.keys(elems)
             // console.log("elems : "+JSON.strcingify(elems))
 
             console.log("podIds : "+podIds)
             podIds.forEach((podId)=>{
                 var elem = elems[podId]
-
-
-                console.log("elem#################\n"+JSON.stringify(elem))
-
                 var pod = {}
 
                 pod.name = elem.metadata.name
                 pod.kind = elem.kind
+                pod.url = "http://"+elem.status.hostIP
                 pod.app = elem.metadata.labels.app
                 pod.createdAt = elem.metadata.creationTimestamp
-                pod.url = "http://"+elem.status.hostIP
-                if (typeof elem.spec.containers[0].ports !== "undefined")
+                
+                if (pod.app === "ide"){
+                    pod.app = elem.spec.containers[0].name
+                    pod.hostNode = elem.spec.nodeName
+                // if (typeof elem.spec.containers[0].ports !== "undefined")
                     pod.url += ":"+ elem.spec.containers[0].ports[0].hostPort
+                }
+                
+                // console.log("$$$$$$pod.app : " + pod.app)
+                // console.log("$$$$$$elem.spec.containers[0].name : " + elem.spec.containers[0].name)
+
+                
+
+                switch (pod.app){
+                case "dappide" :
+                    dAppIDE.push(pod)
+                    break
+                case "remix-ide" : 
+                    contractIDE.push(pod)
+                    break
+                case "kuberneteth" : 
+                    networkIDE.push(pod)
+                }
+
                 pods.push(pod)
-                // console.log("pods&&&&&&&&\n"+JSON.stringify(pods))
-                // console.log("&&&&&"+podId)
-                // console.log("&&&&&"+elems[podId].metadata.name)
-                // console.log("&&&&&"+elems[podId].kind)
             })
+
+            // pods.forEach 
             Workspace.findById(workspaceId).exec().then((workspace)=>{
                 console.log("######"+workspace)
                 res.render('workspaces/show', {
                     workspace : workspace,
-                    pods : pods
+                    networkIDE : networkIDE,
+                    dAppIDE : dAppIDE,
+                    contractIDE : contractIDE
                 })        
             });            
         })
