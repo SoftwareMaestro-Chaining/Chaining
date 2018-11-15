@@ -99,7 +99,7 @@ router.post('/generate/remixs', function(req, res, next) {
 router.delete('/:workspaceId/jupyters/:jupyterName', controller_jupyter.destroy)
 
 //workspace/remix delete
-router.delete('/:workspaceId/jupyters/:remixName', controller_remix.destroy)
+router.delete('/:workspaceId/remixs/:remixName', controller_remix.destroy)
 
 //workspace/jupyter create
 // router.post('/:workspaceId/jupyters', util.isSignedIn, controller_auth.refreshToken, controller_jupyter.create)
