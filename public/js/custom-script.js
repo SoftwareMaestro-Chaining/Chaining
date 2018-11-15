@@ -27,8 +27,17 @@ WE WILL RELEASE FUTURE UPDATES SO IN ORDER TO NOT OVERWRITE YOUR CUSTOM SCRIPT I
 
 
 
-/*start=========================================================================workspaces/forms/jupyter_form.ejs*/
+/*start=========================================================================workspaces/show.ejs*/
 
+
+// $('.preloader-trigger-btn').click(function(){
+//   alert($("body").attr('class'));
+//   $("loader-wrapper").css("visibility", "unset");
+//   $("loader-wrapper").css("transform", "translateY(+100%)");
+//   $("loader-wrapper").css("transition", "all 0.3s ease-out 1s");
+
+//   // $("body").removeclass("loaded");
+// });
 
 // $("#jupyterFormSubmitBtn").click('click', function(e) {
 //   console.log("clicked");
@@ -61,4 +70,4 @@ WE WILL RELEASE FUTURE UPDATES SO IN ORDER TO NOT OVERWRITE YOUR CUSTOM SCRIPT I
   // function onError(data, status){alert("error");}
 
 
-/*end===========================================================================workspaces/forms/jupyter_form.ejs*/
+/*end===========================================================================workspaces/show.ejs*/

@@ -39,8 +39,8 @@ exports.create = (req, res, callback) => {
 	rp(options)
     	.then(function (parsedBody) {
         // POST succeeded...
-        	// res.render("/workspaces/"+workspaceId, )
-        	// res.json("parsedBody : "+JSON.stringify(parsedBody))
+
+        	// res.json('success' + JSON.stringify(parsedBody))
 			res.redirect("/workspaces/"+workspaceId)
 
     	})

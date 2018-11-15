@@ -11,8 +11,9 @@ exports.index = (req, res, callback) => {
 
     var workspaces = [];
 
+console.log("#######"+req.cookies.userId)
     Workspace.find({ user: mongoose.Types.ObjectId(req.cookies.userId)}).populate('user', 'username').exec().then((object) => {
-        // console.log("####"+JSON.stringify(object))
+        console.log("####"+JSON.stringify(object))
       res.render('workspaces/index', {workspaces: object})
     });
 }
@@ -128,7 +129,8 @@ exports.create = (req, res) => {
             // res.render('/workspaces/new', {result : util.successFalse(err), form: workspaceParam});
         else
             // res.json(util.successTrue())
-            res.render('workspaces/index', {result : util.successTrue(workspace)});
+            res.redirect('/workspaces')
+            // res.render('workspaces/index', {result : util.successTrue(workspace)});
         // res.json(err||!user? util.successFalse(err): util.successTrue(user));
     });
 

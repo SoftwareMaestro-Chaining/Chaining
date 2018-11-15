@@ -73,9 +73,12 @@ module.exports = function(option, callback){
 			}).catch(err =>{
 				console.log(err);
 				kong.updateApi(id, api).then(data=>{
-					callback({'status' : 'success Id : '+id});
+
+					callback({'status' : 'success api : '+JSON.stringify(api[0])});
 				}).catch(err=>{
-					callback({'status' : 'error Id : '+id});
+					console.log("%%%%%%");
+					console.log(api);
+					callback({'status' : 'error api : '+JSON.stringify(api[0])});
 				});
 			});
 	}
