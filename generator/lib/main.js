@@ -70,6 +70,7 @@ module.exports = function(option, callback){
 			}
 		
 			//kong.addApi(api).then(data =>{
+<<<<<<< HEAD
 			// kong.updateOrCreateApi(api).then(data =>{
 			// 	//console.log(data);
 			// 	callback({'status' : 'success'});
@@ -81,6 +82,22 @@ module.exports = function(option, callback){
 			// 		callback({'status' : 'error'});
 			// 	});
 			// });
+=======
+			kong.updateOrCreateApi(api).then(data =>{
+				//console.log(data);
+				callback({'status' : 'success'});
+			}).catch(err =>{
+				console.log(err);
+				kong.updateApi(id, api).then(data=>{
+
+					callback({'status' : 'success api : '+JSON.stringify(api[0])});
+				}).catch(err=>{
+					console.log("%%%%%%");
+					console.log(api);
+					callback({'status' : 'error api : '+JSON.stringify(api[0])});
+				});
+			});
+>>>>>>> e7cfae572cb9f4fc0da071380238a515d926a31c
 	}
 
 	var spawn = require('child-process-promise').spawn;

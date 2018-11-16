@@ -1,0 +1,61 @@
+<% layout('../layout/index.layout') -%>
+<div class="row">
+	<% if (typeof workspaces ==  'undefined' || workspaces.length==0) {%>
+		<br><br><br><br><br>
+		<div class="col s12 m12 l12">
+			<p class="caption center bold">NO WORKSPACE YET</p>
+			<p class="caption center">Want to make a new workspace?</p>
+			<div class="center-align">
+				<a class="waves-effect waves-light btn-large animated infinite animation-rubberBand" href="/workspaces/new"><i class="mdi-content-add left"></i>New Workspace</a>
+			</div>
+		</div>
+	<% } else {%>
+		<% workspaces.forEach(function(workspace) { %>
+		<!-- blog card -->
+		<div class="col s12 m4 l2">
+	    	<div class="blog-card">
+	        	<div class="card">
+	            	<div class="card-image waves-effect waves-block waves-light">
+	            		<a href="/workspaces/<%=workspace._id%>">
+	                		<img src="/images/<%=workspace.type.toLowerCase()%>-logo.png" alt="blog-img">
+	                	</a>
+	            	</div>
+	            	<ul class="card-action-buttons">
+	                	<li><a class="btn-floating waves-effect waves-light green accent-4"><i class="mdi-social-share"></i></a></li>
+	                	<li><a class="btn-floating waves-effect waves-light red accent-2"><i class="mdi-action-favorite"></i></a></li>                            
+	                	<li><a class="btn-floating waves-effect waves-light light-blue"><i class="mdi-action-info activator"></i></a></li>
+	            	</ul>
+	            	<div class="card-content">
+	                	<p class="row">
+	                  		<span class="left"><a href=""><%= workspace.type.charAt(0).toUpperCase() + workspace.type.slice(1) %></a></span>
+	                  		<span class="right">
+	                  			<i class="<% workspace.scope === 'private'? 'mdi-action-lock' : 'mdi-social-people' %>"></i>
+			                </span>
+	                	</p>
+	                	<h4 class="card-title grey-text text-darken-4"><a href="/workspaces/<%=workspace._id%>" class="grey-text text-darken-4"><%= workspace.name.length>15? workspace.name.slice(0, 15)+'...' : workspace.name %></a></h4>
+	                	<p class="blog-post-content"><%= workspace.description.length>45? workspace.description.slice(0, 45)+'...' : workspace.description %></p>
+		                <div class="row">
+		                    <div class="col s3">
+		                    	<img src="/images/avatar.png" alt="" class="circle responsive-img valign profile-image">
+		                    </div>
+		                    <div class="col s5">
+		                    	<a href="#"><%= workspace.user.username %></a>
+		                    </div>
+	                  	</div>
+	                  	<div class="row">
+	                    	<span class="col right"><%= workspace.createdAt.toDateString() %></span>
+	                	</div>
+	              	</div>
+	              	<div class="card-reveal">
+	                 	<span class="card-title grey-text text-darken-4"><i class="mdi-navigation-close right"></i><%= workspace.name %></span>
+	                  	<p><%= workspace.description %></p>
+	              	</div>
+	          	</div>
+	      	</div>
+	  	</div>
+	<% })}; %>
+</div>
+
+
+
+

@@ -87,7 +87,9 @@ async function all(callback){
 var promises = [p(node), p(main)]
     return Promise.all(promises).then((data)=>{
 	    var items = Object.assign({},data[0], data[1]);
-	    //console.log(result)
+	    // console.log("####^^^"+result)
+        console.log("####^^^"+JSON.stringify(data[0]))
+
 	    relations = relations.map((obj)=>{
 		    obj.source = nodeMap.get(obj.source) 
 		    return obj
@@ -97,7 +99,7 @@ var promises = [p(node), p(main)]
 		'items' : items,
 		'relations' : relations
 	    }
-
+        
 	    return result 
     })	.then(callback)
 	/*
@@ -115,7 +117,7 @@ var promises = [p(node), p(main)]
 }
 
 controller.getListNode = function(callback){
-    node(callback)
+    return node(callback)
 }
 
 controller.all = function(callback){

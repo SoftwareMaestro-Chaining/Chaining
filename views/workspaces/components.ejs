@@ -1,0 +1,136 @@
+					<div id="component-collections">
+                        <div class="row">
+                            <div class="col s12 m12 l6">
+                                <ul id="projects-collection" class="collection">
+                                    <li class="collection-item avatar">
+                                    	<!-- <a class="btn-floating waves-effect btn modal-trigger light-blue right" href="#modal_ethereum"><i class="mdi-content-add left"></i></a> -->
+                                        <i class="mdi-file-folder circle light-blue darken-2"></i>
+                                        <span class="collection-header strong">Blockchain Network</span>
+                                        <p>Compose your Ethereum / Hyperledger Network Nodes</p>
+
+                                    </li>
+                                    <li class="collection-item">
+                                        <div class="row">
+                                            <div class="col s10">
+                                                <div class="col s7">
+                                                    <p class="collections-title strong"><%= workspace.name %></p>
+                                                    <p class="collections-content">Default Network for this Workspace</p>
+                                                </div>
+                                                <div class="col s2">
+                                                    <br>
+                                                    <span class="task-cat red darken-3">Error</span>
+                                                </div>
+                                                <div class="col s3">
+                                                    <div id="project-line-1"><canvas width="135" height="30" style="display: inline-block; width: 135px; height: 30px; vertical-align: top;"></canvas></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    
+                                </ul>
+
+                    			<% include forms/ethereum_form %>
+
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col s12 m12 l6">
+                                <ul id="issues-collection" class="collection">
+                                    <li class="collection-item avatar">
+                                    	<a class="btn-floating waves-effect btn modal-trigger red right" href="#modal_jupyter"><i class="mdi-content-add left"></i></a>
+                                        <i class="mdi-file-folder circle red darken-2"></i>
+                                        <span class="collection-header strong">dApp Service</span>
+                                        <p>Struct your Application View and Transactions</p>
+                                    </li>
+                                    <% var count = 1 %>
+                                    <% dAppIDE.forEach(function(IDE) { %>
+                                        <li class="collection-item">
+                                            <div class="row">
+                                                <div class="col s7">
+                                                    <p class="collections-title darken-2">
+                                                        <strong class="red-text">#<%=count%></strong>
+                                                        <strong><%= IDE.name.split("-")[0]%></strong>
+                                                        <p class="collections-content">
+                                                            <%= IDE.name %>
+                                                        </p>
+                                                        
+                                                    </p>
+                                                </div>
+                                                <div class="col s2">
+                                                    <br>
+                                                    <span class="task-cat pink accent-2">Deploying</span>
+                                                    <p><%= IDE.hostNode %></p>
+                                                </div>
+                                                <div class="col s3">
+                                                    <br>
+<!--                                                     <div class="progress">
+                                                         <div class="determinate" style="width: 70%"></div>   
+                                                    </div>  -->
+                                                    <a href="<%=IDE.url%>" class="btn-classic mdi-action-open-in-browser center" target="_blank"><br> Open </a>    
+                                                    <a href="/workspaces/<%=workspace._id%>/jupyters/<%=IDE.name.split('-')[0]%>?_method=DELETE" class="btn-classic mdi-action-delete center preloader-trigger-btn" data-method="delete"><br> Delete </a>                                   
+                                                </div>
+                                            </div>
+                                        </li>
+                                    <% count++ %>
+                                    <% }) %>
+                                </ul>
+
+                    			<% include forms/jupyter_form %>
+
+                            </div>
+                        </div>
+                        <div class="row">
+                        	<div class="col s12 m12 l6">
+                                <ul id="issues-collection" class="collection">
+                                    <li class="collection-item avatar">
+                                    	<a class="btn-floating waves-effect btn modal-trigger yellow right" href="#modal_remix"><i class="mdi-content-add left"></i></a>
+                                        <i class="mdi-file-folder circle yellow darken-2"></i>
+                                        <span class="collection-header strong">Smart Contract</span>
+                                        <p>Define your Service Logic</p>
+                                    </li>
+                                    <% var count = 1 %>
+                                    <% contractIDE.forEach(function(IDE) { %>
+                                        <li class="collection-item">
+                                            <div class="row">
+                                                <div class="col s7">
+                                                    <p class="collections-title ">
+                                                        <strong class="yellow-text text-darken-1">#<%=count%></strong>
+                                                        <strong><%= IDE.name.split("-")[0] %></strong>
+                                                    </p>
+                                                    <p class="collections-content">
+                                                        <%=IDE.name%>
+                                                    </p>
+                                                </div>
+                                                <div class="col s2">
+                                                    <br>
+                                                    <span class="task-cat cyan">Healthy</span>
+  
+                                                    <p><%= IDE.hostNode %></p>
+                                                </div>
+                                                <div class="col s3">
+                                                    <br>
+<!--                                                     <div class="progress">
+                                                         <div class="determinate" style="width: 70%"></div>   
+                                                    </div> -->             
+                                                    <a href="<%=IDE.url%>" class="btn-classic mdi-action-open-in-browser center" target="_blank"><br> Open </a>  
+                                                    <a href="/workspaces/<%=workspace._id%>/remixs/<%=IDE.name.split('-')[0]%>?_method=DELETE" class="btn-classic mdi-action-delete center preloader-trigger-btn" data-method="delete"><br> Delete </a> 
+                                                </div>
+                                            </div>
+                                        </li>
+                                    <% count++ %>
+                                    <% }) %>
+
+                                </ul>
+
+                    			<% include forms/remix_form %>
+
+                            </div>
+                        </div>
+
+
+                    </div>
+
+
+
+
+

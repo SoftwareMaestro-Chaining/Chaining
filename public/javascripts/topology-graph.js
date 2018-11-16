@@ -198,7 +198,7 @@
 	    selection = item;
 	    console.log(item);
             svg.selectAll("g")
-                .classed("selected", function(d) { return d.item === item; });
+                .classed("selected_vertex", function(d) { return d.item === item; });
 	    if(flag){
 		redirect(item);
 	    }

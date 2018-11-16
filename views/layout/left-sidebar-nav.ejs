@@ -1,0 +1,66 @@
+<% apiUrl = requestObject.url.split('/') %>
+
+          <aside id="left-sidebar-nav">
+            <ul id="slide-out" class="side-nav fixed leftside-navigation">
+                <!--<li class="user-details cyan darken-2">-->
+                <li class="user-details">
+                <div class="row">
+                    <div class="col col s4 m4 l4">
+                        <img src="/images/avatar.png" alt="" class="circle responsive-img valign profile-image">
+                    </div>
+                    <div class="col col s8 m8 l8">
+                        <ul id="profile-dropdown" class="dropdown-content">
+                            <li><a href="#"><i class="mdi-action-face-unlock"></i> Profile</a>
+                            </li>
+                            <li><a href="#"><i class="mdi-action-settings"></i> Settings</a>
+                            </li>
+                            <li><a href="#"><i class="mdi-communication-live-help"></i> Help</a>
+                            </li>
+                            <li class="divider"></li>
+                            <li><a href="#"><i class="mdi-action-lock-outline"></i> Lock</a>
+                            </li>
+                            <li><a href="/users/sign_out"><i class="mdi-hardware-keyboard-tab"></i> Logout</a>
+                            </li>
+                        </ul>
+                        <a class="btn-flat dropdown-button waves-effect waves-light grey-text profile-btn" href="#" data-activates="profile-dropdown" id="left-sidebar-nav-username">홍길동<i class="mdi-navigation-arrow-drop-down right"></i></a>
+                        <p class="user-roal grey-text" id="left-sidebar-nav-email">chaining@soma.com</p>
+                    </div>
+                </div>
+                </li>
+                <li class="<%= apiUrl[1]&&apiUrl[1]==='main'? 'bold active' : 'bold' %>"><a href="/main" class="waves-effect waves-cyan"><i class="mdi-action-dashboard"></i> Dashboard</a>
+                </li>
+                <li class="li-hover"><p class="ultra-small margin more-text">WORKSPACE</p></li>
+                <li class="<%= apiUrl[1]&&apiUrl[1]==='workspaces'&&!apiUrl[2]? 'bold active' : 'bold' %>"><a href="/workspaces" class="waves-effect waves-cyan"><i class="mdi-action-view-carousel"></i>List</a>
+                </li>
+                <li class="<%= apiUrl[1]&&apiUrl[1]==='workspaces'&&apiUrl[2]&&apiUrl[2]==='new'? 'bold active' : 'bold' %>"><a href="/workspaces/new" class="waves-effect waves-cyan"><i class="mdi-av-queue"></i>New</a>
+                </li>
+                <li class="li-hover"><p class="ultra-small margin more-text">MORE</p></li>
+                <li class="<%= apiUrl[1]&&apiUrl[1]==='help'? 'bold active' : 'bold' %>"><a href="/help"><i class="mdi-communication-live-help"></i> Help</a>
+                </li>
+
+            </ul>
+            <a href="#" data-activates="slide-out" class="sidebar-collapse btn-floating btn-medium waves-effect waves-light hide-on-large-only cyan"><i class="mdi-navigation-menu"></i></a>
+            </aside>
+<script>
+    function getCookie(cookie_name) {
+      var x, y;
+      var val = document.cookie.split(';');
+
+      for (var i = 0; i < val.length; i++) {
+        x = val[i].substr(0, val[i].indexOf('='));
+        y = val[i].substr(val[i].indexOf('=') + 1);
+        x = x.replace(/^\s+|\s+$/g, ''); // 앞과 뒤의 공백 제거하기
+        if (x == cookie_name) {
+          return unescape(y); // unescape로 디코딩 후 값 리턴
+        }
+      }
+    }
+
+    window.onload = function() {
+        var username = getCookie("username")
+        var email = getCookie("email")
+        document.getElementById("left-sidebar-nav-username").innerHTML = username;
+        document.getElementById("left-sidebar-nav-email").innerHTML = email;
+    }
+        
+</script>  

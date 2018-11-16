@@ -1,0 +1,49 @@
+<div id="modal_remix" class="modal modal-fixed-footer">
+  <form class="col s12" action="/workspaces/<%=workspace.id%>/remixs/" method="post" id="remix-form">
+    <div class="modal-content">
+      <div class="card-panel">
+        <h4 class="header2">Create a new Jupyter</h4>
+          <div class="row">
+
+              <div class="row">
+                <div class="input-field col s6">
+                  <input id="remix_name" type="text" name="name">
+                  <label for="remix_name">Name</label>
+                </div>
+                <div class="input-field col s6">
+                  <input id="remix_description" type="text" name="description">
+                  <label for="remix_description">Description</label>
+                </div>
+              </div>
+
+              <div class="divider"></div>
+
+              <input id="remix_workspaceId" name="workspaceId" type="hidden" value="<%=workspace._id%>">
+              
+              <div class="row">
+<!--                 <div class="input-field col s6">
+                  <input id="remix_endpoint" type="text" name="endpoint">
+                  <label for="remix_endpoint">Endpoint</label>
+                </div> -->
+                <div class="input-field col s6">
+                  <input id="remix_port" type="text" name="port">
+                  <label for="remix_port">Port</label>
+                </div>
+              </div>
+           </div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button href="#" class="waves-effect waves-red btn-flat modal-action modal-close preloader-trigger-btn" type="submit" id="remixFormSubmitBtn">Submit</button>
+        
+        <!-- <button class="waves-effect waves-green btn-flat modal-action modal-close">Cancel</button> -->
+      </div>
+
+  </form>
+
+
+    </div>
+</div>
+
+
