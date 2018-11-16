@@ -20,6 +20,12 @@ router.get('/graph', function(req, res, next) {
   res.render('topology-graph', {title : 'Chaining'})
 });
 
+
+router.get('/graph_test', function(req, res, next) {
+  res.render('topology-graph-test', {title : 'Chaining'})
+});
+
+
 router.get('/terminal', function(req, res, next) {
   console.log(req.query.ws_link)
   let data = {

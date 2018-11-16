@@ -42,17 +42,15 @@
                 title: 'Exec the container',
                 action: function(element, d, i) {
                     let endpoint = "ws://192.168.31.200:8080";
-                    let podlink = "/api/v1/namespaces/default/pods/markdownrender-cf999cf5b-p72bb";
-                    let container = "markdownrender";
+                    let podlink = element.item.metadata.selfLink;
+                    let container = element.item.spec.containers[0].name;
+                    // let endpoint = "ws://192.168.31.200:8080";
+                    // let podlink = "/api/v1/namespaces/default/pods/markdownrender-cf999cf5b-p72bb";
+                    // let container = "markdownrender";
+                    // console.log(element.item.metadata.selfLink);
+                    // console.log(element.item.spec.containers[0].name);
                     // let ws_link = endpoint + podlink + container;
                     location.replace("/terminal"+ "?endpoint=" + endpoint + "&podlink=" + podlink + "&container=" + container);
-                 
-
-                    // let $modal = $("#myModal");
-                    // setExecConfig(element.item, $modal);
-                    
-                    // $modal.modal();
-                    // console.log(element);
                     
                 }
             }
@@ -378,6 +376,13 @@
                             if (kinds){
                                 text = kinds[d.item.kind];
                                 // console.log(d.item.kind);
+                                if(d.item.kind == "Node"){
+                                    console.log(d.item.status.nodeInfo.osImage)
+                                    console.log(d.item.status.nodeInfo.architecture)
+                                    if(d.item.status.nodeInfo.architecture === "arm" && d.item.status.nodeInfo.osImage === "Raspbian GNU/Linux 8 (jessie)" ){
+                                        text = kinds["RpiNode"];
+                                    }
+                                }
                                 if(d.item.kind == "Pod" && d.item.metadata.labels && d.item.metadata.labels.hasOwnProperty('name')){
                                     switch(d.item.metadata.labels.name){
                                         case 'eth':
