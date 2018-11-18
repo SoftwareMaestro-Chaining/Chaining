@@ -6,9 +6,13 @@ var util = require('../../util');
 
 const controller = require('./workspace.controller');
 const controller_auth = require('../user/auth.controller');
-const controller_remix = require('./remix.controller');
-const controller_jupyter = require('./jupyter.controller');
-const controller_ethereum = require('./ethereum.controller');
+
+const crud = require('./crud.controller').core;
+
+const controller_jupyter = crud('juptyer');
+const controller_ethereum = crud('ethereum');
+const controller_remix = crud('remix');
+
 const controller_component = require('./component.controller')
 
 router.use( function( req, res, next ) {
@@ -73,27 +77,27 @@ router.get('/:workspaceId/all.jsonp', function(req, res, next) {
 // router.delete('/:id', controller.destroy);
 
 //workspace/jupyter generate
-router.post('/generate/jupyters', function(req, res, next) {
-  // res.json({})
-  console.log("init generation jupyter");
-  req.body.app = 'jupyter'
-  require('../../generator')(req.body, (data)=>{
-    res.json(data);
-  })
-});
+// router.post('/generate/jupyters', function(req, res, next) {
+//   // res.json({})
+//   console.log("init generation jupyter");
+//   req.body.app = 'jupyter'
+//   require('../../generator')(req.body, (data)=>{
+//     res.json(data);
+//   })
+// });
 
 //workspace/jupyter destroy
 
 
 //workspace/remix generate
-router.post('/generate/remixs', function(req, res, next) {
-  // res.json({})
-  console.log("init generation remix");
-  req.body.app = 'remix'
-  require('../../generator')(req.body, (data)=>{
-    res.json(data);
-  })
-});
+// router.post('/generate/remixs', function(req, res, next) {
+//   // res.json({})
+//   console.log("init generation remix");
+//   req.body.app = 'remix'
+//   require('../../generator')(req.body, (data)=>{
+//     res.json(data);
+//   })
+// });
 
 //workspace/jupyter delete
 router.delete('/:workspaceId/jupyters/:jupyterName', controller_jupyter.destroy)
@@ -102,11 +106,11 @@ router.delete('/:workspaceId/jupyters/:jupyterName', controller_jupyter.destroy)
 router.delete('/:workspaceId/remixs/:remixName', controller_remix.destroy)
 
 //workspace/jupyter create
-// router.post('/:workspaceId/jupyters', util.isSignedIn, controller_auth.refreshToken, controller_jupyter.create)
-router.post('/:workspaceId/jupyters', controller_jupyter.create)
+router.post('/:workspaceId/jupyters', util.isSignedIn, controller_auth.refreshToken, controller_jupyter.create)
+// router.post('/:workspaceId/jupyters', controller_jupyter.create)
 
 //workspace/remix create
-// router.post('/:workspaceId/remixs', util.isSignedIn, controller_auth.refreshToken, controller_remix.create)
-router.post('/:workspaceId/remixs', controller_remix.create)
+router.post('/:workspaceId/remixs', util.isSignedIn, controller_auth.refreshToken, controller_remix.create)
+// router.post('/:workspaceId/remixs', controller_remix.create)
 
 module.exports = router;

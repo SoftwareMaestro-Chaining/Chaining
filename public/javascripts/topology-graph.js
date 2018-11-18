@@ -379,8 +379,11 @@
                                 if(d.item.kind == "Node"){
                                     console.log(d.item.status.nodeInfo.osImage)
                                     console.log(d.item.status.nodeInfo.architecture)
-                                    if(d.item.status.nodeInfo.architecture === "arm" && d.item.status.nodeInfo.osImage === "Raspbian GNU/Linux 8 (jessie)" ){
+                                    if( d.item.status.nodeInfo.osImage === "Raspbian GNU/Linux 8 (jessie)" ){
+                                        console.log(d.item.status.nodeInfo.osImage)
+                                        // if(d.item.status.nodeInfo.architecture === "arm" && d.item.status.nodeInfo.osImage === "Raspbian GNU/Linux 8 (jessie)" ){
                                         text = kinds["RpiNode"];
+                                        return text || "";
                                     }
                                 }
                                 if(d.item.kind == "Pod" && d.item.metadata.labels && d.item.metadata.labels.hasOwnProperty('name')){

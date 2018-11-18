@@ -25,7 +25,7 @@ router.get('/graph_test', function(req, res, next) {
 
 
 router.get('/terminal', function(req, res, next) {
-<<<<<<< HEAD
+
   console.log(req.query.ws_link)
   let data = {
     'title' : 'Chaining',
@@ -35,9 +35,6 @@ router.get('/terminal', function(req, res, next) {
   }
   // console.log(req.params.ws_link)
   res.render('container-terminal', data);
-=======
-  res.render('container-terminal', {title : 'Chaining'})
->>>>>>> e7cfae572cb9f4fc0da071380238a515d926a31c
 });
 
 // var controller = require('../controller');

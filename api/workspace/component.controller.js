@@ -17,14 +17,16 @@ console.log("callback")
 	//console.log(myns);
 	const promises = myns.map(getPod);
     await Promise.all(promises).then((data)=>{
-        var data = fileter(data);
+        var data = filter(data);
         //console.log(data);
-        callback(data)});
+        // callback(data)});
+        return data;
+    }).then(callback);
 
 }
 var key = ""
 var relations = []
-function fileter(before){
+function filter(before){
     var data ={}
     before.forEach(v=>{
         json = Object.assign({}, v.items);
@@ -61,17 +63,19 @@ var controller = {};
 controller.getListk8s = function(callback){
     pod(callback)
 }
-var nodeMap = new Map()
+let nodeMap = new Map()
+let masteruid = "";
 async function node(callback) {
     const nodes = await client.apis.v1.nodes.get();
 
     var data ={}
+
     nodes.body.items.forEach(v=>{
-	var key = v.metadata.uid || key
-	data[key] = v    
+        var key = v.metadata.uid || key
+        data[key] = v    
         data[key].kind = "Node";
         data[key].apiVersion = nodes.body.apiVersion;
-	nodeMap.set(v.metadata.name, v.metadata.uid)
+	    nodeMap.set(v.metadata.name, v.metadata.uid)
     })
     //console.log(data)
     callback(data)
@@ -92,7 +96,15 @@ var promises = [p(node), p(pod)]
 	    relations = relations.map((obj)=>{
 		    obj.source = nodeMap.get(obj.source) 
 		    return obj
-	    });
+        });
+
+        // node mapping
+        nodeMap.forEach((value, key, map)=>{
+            if(key !== "kubemaster"){
+                relations.push({ source : nodeMap.get('kubemaster'), target : value})
+            }
+        })
+        // console.log((nodeMap.get('kubemaster')));
 
 	    var result = {
 		'items' : items,

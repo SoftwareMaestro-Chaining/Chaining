@@ -52,53 +52,53 @@ module.exports = function(option, callback){
 
 	
 
-	async function main(callback) {
-			const client = new Client({ config: config.fromKubeconfig(), version: '1.9' });
+	// async function main(callback) {
+	// 		const client = new Client({ config: config.fromKubeconfig(), version: '1.9' });
 
-			const deployment = await client.apis.apps.v1.namespaces(id).deployments(pod_name).get();
-			// console.log(deployment.body.spec.template.spec.containers[0].ports[0]);
-			var port = (deployment.body.spec.template.spec.containers[0].ports[0].hostPort);
-			const pod = await client.api.v1.namespaces(id).pods.get(id);
-			console.log(pod.body.items[0].status.hostIP)
-			var host = (pod.body.items[0].status.hostIP)
+	// 		const deployment = await client.apis.apps.v1.namespaces(id).deployments(pod_name).get();
+	// 		// console.log(deployment.body.spec.template.spec.containers[0].ports[0]);
+	// 		var port = (deployment.body.spec.template.spec.containers[0].ports[0].hostPort);
+	// 		const pod = await client.api.v1.namespaces(id).pods.get(id);
+	// 		console.log(pod.body.items[0].status.hostIP)
+	// 		var host = (pod.body.items[0].status.hostIP)
 			
-			var api = {
-				'name' : id,
-				'uris' : '/' + id,
-				'methods' : "GET",
-				"upstream_url": "http://" + host + ":" + port
-			}
+	// 		var api = {
+	// 			'name' : id,
+	// 			'uris' : '/' + id,
+	// 			'methods' : "GET",
+	// 			"upstream_url": "http://" + host + ":" + port
+	// 		}
 		
-			//kong.addApi(api).then(data =>{
-<<<<<<< HEAD
-			// kong.updateOrCreateApi(api).then(data =>{
-			// 	//console.log(data);
-			// 	callback({'status' : 'success'});
-			// }).catch(err =>{
-			// 	console.log(err);
-			// 	kong.updateApi(id, api).then(data=>{
-			// 		callback({'status' : 'success'});
-			// 	}).catch(err=>{
-			// 		callback({'status' : 'error'});
-			// 	});
-			// });
-=======
-			kong.updateOrCreateApi(api).then(data =>{
-				//console.log(data);
-				callback({'status' : 'success'});
-			}).catch(err =>{
-				console.log(err);
-				kong.updateApi(id, api).then(data=>{
+	// 		callback({'status' : 'success api : '+JSON.stringify(api[0])});
 
-					callback({'status' : 'success api : '+JSON.stringify(api[0])});
-				}).catch(err=>{
-					console.log("%%%%%%");
-					console.log(api);
-					callback({'status' : 'error api : '+JSON.stringify(api[0])});
-				});
-			});
->>>>>>> e7cfae572cb9f4fc0da071380238a515d926a31c
-	}
+
+	// 		//kong.addApi(api).then(data =>{
+	// 		// kong.updateOrCreateApi(api).then(data =>{
+	// 		// 	//console.log(data);
+	// 		// 	callback({'status' : 'success'});
+	// 		// }).catch(err =>{
+	// 		// 	console.log(err);
+	// 		// 	kong.updateApi(id, api).then(data=>{
+	// 		// 		callback({'status' : 'success'});
+	// 		// 	}).catch(err=>{
+	// 		// 		callback({'status' : 'error'});
+	// 		// 	});
+	// 		// });
+	// 		// kong.updateOrCreateApi(api).then(data =>{
+	// 		// 	//console.log(data);
+	// 		// 	callback({'status' : 'success'});
+	// 		// }).catch(err =>{
+	// 		// 	console.log(err);
+	// 		// 	kong.updateApi(id, api).then(data=>{
+
+	// 		// 		callback({'status' : 'success api : '+JSON.stringify(api[0])});
+	// 		// 	}).catch(err=>{
+	// 		// 		console.log("%%%%%%");
+	// 		// 		console.log(api);
+	// 		// 		callback({'status' : 'error api : '+JSON.stringify(api[0])});
+	// 		// 	});
+	// 		// });
+	// }
 
 	var spawn = require('child-process-promise').spawn;
 
@@ -111,7 +111,8 @@ module.exports = function(option, callback){
 				console.log(result.stdout.toString());
 				setTimeout(()=>{
 					//callback({})
-					 main(callback);
+					//  main(callback);
+					 callback({'status' : 'success'});
 				}, 8000);
 			})
 			.catch(function(err){

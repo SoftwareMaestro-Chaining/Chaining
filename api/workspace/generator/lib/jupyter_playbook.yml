@@ -5,7 +5,7 @@
     user: "{{ namespace }}"
   become: yes
   tasks:
-    - name: Create directory
+    - name: Create jupyter workspace
       become: yes
       file:
         path: "{{ nfs_path }}"
@@ -15,9 +15,18 @@
         group: "vagrant"
         mode: "0777"
 
+    - name: Create template directory
+      become: yes
+      file:
+        path: "../user_template/{{ namespace }}"
+        state: "directory"
+        recurse: "yes"
+        owner: "vagrant"
+        group: "vagrant"
+
     - name: Ansible Template Example
       template:
         src: template_jupyter.j2
-        dest: "{{ file }}"
+        dest: "../user_template/{{ namespace }}/{{ file }}"
         #- name: deploy user App
         #command: "kubectl create -f {{ user }}_template.yaml"
