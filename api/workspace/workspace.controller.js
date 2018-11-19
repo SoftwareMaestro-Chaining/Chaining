@@ -182,27 +182,27 @@ exports.create = (req, res) => {
 //         })
 // }
 
-// exports.destroy = (req, res) => {
-//     let id = req.params.id;
-//     let user = req.user;
+exports.destroy = (req, res) => {
+    let workspaceId = req.params.workspaceId;
+    // let user = req.user;
 
-//     if (!user) {
-//         return res.status(401).json({msg: 'You need login'});
-//     }
+    // if (!user) {
+    //     return res.status(401).json({msg: 'You need login'});
+    // }
 
-//     Workspace.destroy({
-//         where: {
-//             bookmark_id: id,
-//             bookmark_user: user
-//         }
-//     })
-//         .then(bookmark => {
-//             if (!bookmark) {
-//                 return res.status(404).json({error: 'No Workspace'});
-//             }
-//             return res.status(204).send();
-//         });
-// }
+    console.log("workspace delete started");
+
+    Workspace.deleteOne({
+            _id: workspaceId
+            // bookmark_user: user
+        })
+        .then(workspace => {
+            if (!workspace) {
+                return res.status(404).json({error: 'No Workspace'});
+            }
+            return res.redirect('/workspaces');
+        });
+}
 
 // exports.create = (req, res) => {
 //     let id = req.body.search_seq;

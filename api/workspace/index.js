@@ -69,8 +69,8 @@ router.get('/:workspaceId/all.jsonp', function(req, res, next) {
 // workspace update
 // router.put('/:id', controller.put);
 
-// workspace delete
-// router.delete('/:id', controller.destroy);
+//workspace delete
+router.delete('/:workspaceId', controller.destroy);
 
 //workspace/jupyter generate
 router.post('/generate/jupyters', function(req, res, next) {
