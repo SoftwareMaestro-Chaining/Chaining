@@ -20,9 +20,9 @@ spec:
     spec:
         containers:
           - name: remix-ide
-            image:  redtree941/remix-ide
+            image: redtree941/remix-ide:arm
             ports:
                 - containerPort: 8080
-                  hostPort : 50000
+                  hostPort : 15000
             command: ["npm"]
             args: ["start"]
